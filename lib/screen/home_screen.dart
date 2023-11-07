@@ -1,5 +1,6 @@
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_course_widget.dart';
+import 'package:education/widgets/header_user_widget.dart';
 import 'package:education/widgets/section_separator.dart';
 import 'package:education/widgets/title_show_widget.dart';
 import 'package:education/widgets/card_course_button_widget.dart';
@@ -16,8 +17,9 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(children: [
           const SizedBox(
-            height: 50.0,
+            height: 80.0,
           ),
+          HeaderUserWidget(user: "Harvey"),
           TitleShowWidget(title: "Proximos Cursos", button: "Ver todos"),
           const SizedBox(
             height: 10.0,
