@@ -1,4 +1,5 @@
 import 'package:education/screen/home_screen.dart';
+import 'package:education/screen/login_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "NunitoSans",
           useMaterial3: true,
           primaryColor: Colors.blue),
-      home: const HomeScreen(),
+      home: const LoginScreen(),
     );
   }
 }
