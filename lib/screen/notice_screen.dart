@@ -1,5 +1,6 @@
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_notice_widget.dart';
+import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class NoticeScreen extends StatelessWidget {
@@ -9,18 +10,8 @@ class NoticeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kBrandWhite,
-        appBar: AppBar(
-          foregroundColor: kBrandBlack,
-          backgroundColor: kBrandWhite,
-          shadowColor: Colors.black38,
-          surfaceTintColor: kBrandWhite,
-          title: const Text(
-            "Comunicados",
-            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
-          ),
-          leading: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+        appBar: CustomAppBarWidget(
+          title: "Comunicados",
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -37,7 +28,8 @@ class NoticeScreen extends StatelessWidget {
                 height: 20.0,
               ),
               CardNoticeWidget(
-                text: 'Descripción de una noticia',
+                text:
+                    'Descripción de una noticiaDescripción de una noticiaDescripción de una noticiaDescripción de una noticiaDescripción de una noticia',
                 title: 'Titulo de una noticia',
               ),
               const SizedBox(

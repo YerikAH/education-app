@@ -1,6 +1,7 @@
 import 'package:education/screen/home_screen.dart';
 import 'package:education/screen/login_screen.dart';
 import 'package:education/screen/notice_screen.dart';
+import 'package:education/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -16,8 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           fontFamily: "NunitoSans",
           useMaterial3: true,
-          primaryColor: Colors.blue),
-      home: const LoginScreen(),
+          primaryColor: Colors.blue,
+          textSelectionTheme: TextSelectionThemeData(
+              cursorColor: Colors.blue,
+              selectionColor: Colors.blue[100],
+              selectionHandleColor: Colors.blue)),
+      home: ProfileScreen(),
     );
   }
 }

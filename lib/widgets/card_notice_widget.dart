@@ -36,10 +36,18 @@ class CardNoticeWidget extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
+            const SizedBox(
+              width: 20.0,
+            ),
+            const Icon(
+              Icons.calendar_month,
+              size: 18.0,
+            ),
             SizedBox(
-              width: screenSize.width - 130,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
+              width: screenSize.width - 150,
+              child: Container(
+                padding: const EdgeInsets.only(
+                    bottom: 20.0, top: 20.0, left: 10.0, right: 5.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -63,12 +71,20 @@ class CardNoticeWidget extends StatelessWidget {
                           color: kBrandGray,
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal),
+                    ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    const Text(
+                      "27-08-2023",
+                      style: TextStyle(fontSize: 12.0, color: kBrandBlack),
+                      textAlign: TextAlign.start,
                     )
                   ],
                 ),
               ),
             ),
-            Icon(Icons.arrow_forward_ios_rounded)
+            const Icon(Icons.arrow_forward_ios_rounded)
           ],
         ),
       ),

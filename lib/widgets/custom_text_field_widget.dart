@@ -1,23 +1,38 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
   String hintText;
-  CustomTextFieldWidget({
-    super.key,
-    required this.hintText,
-  });
+  TextEditingController controller;
+  bool? isRequired;
+  CustomTextFieldWidget(
+      {super.key,
+      required this.hintText,
+      required this.controller,
+      this.isRequired});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: controller,
       style: const TextStyle(color: Colors.black),
       cursorColor: Colors.blue,
+      obscureText: false,
+      enableInteractiveSelection: true,
       decoration: InputDecoration(
+        labelStyle: const TextStyle(color: Colors.blue),
+        errorStyle: const TextStyle(color: Colors.red),
         hoverColor: Colors.black,
         filled: true,
         fillColor: Colors.white,
+        focusColor: Colors.blue,
+        helperStyle: TextStyle(color: Colors.blue),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.black12, width: 1.0),
+          borderSide: const BorderSide(
+            color: Colors.black12,
+            width: 1.0,
+          ),
           borderRadius: BorderRadius.circular(255.0),
         ),
         enabledBorder: OutlineInputBorder(
@@ -29,10 +44,20 @@ class CustomTextFieldWidget extends StatelessWidget {
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
         errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 1.0),
           borderRadius: BorderRadius.circular(255.0),
-          borderSide: BorderSide.none,
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 1.0),
+          borderRadius: BorderRadius.circular(255.0),
         ),
       ),
+      validator: (String? value) {
+        if (value != null && value.isEmpty && isRequired == true) {
+          return "Este campo es obligatorio";
+        }
+        return null;
+      },
     );
   }
 }
