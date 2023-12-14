@@ -1,16 +1,15 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:education/themes/colors.dart';
+import 'package:education/widgets/button_decoration_widget.dart';
 import 'package:education/widgets/card_navigation_widget.dart';
-import 'package:education/widgets/card_notice_widget.dart';
+import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:education/widgets/custom_bottom_navigator.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
-  Color color;
-  String text;
-  IconData icon;
-  ProfileScreen(
-      {Key? key, required this.color, required this.text, required this.icon})
-      : super(key: key);
+  const ProfileScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,100 +19,97 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            CustomAppBarWidget(title: "Perfil"),
+            SizedBox(
               width: double.infinity,
-              decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.horizontal(
-                      left: Radius.circular(50.0),
-                      right: Radius.circular(50.0))),
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 50.0111,
-                  ),
-                  const Text(
-                    "Perfil",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  const SizedBox(
-                    height: 30.0111,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(3.0),
-                          decoration: BoxDecoration(
-                              color: Colors.lightBlue[200],
-                              borderRadius: BorderRadius.circular(255)),
-                          child: const CircleAvatar(
-                            radius: 50.0,
-                            backgroundImage:
-                                AssetImage("assets/avatar_test.jpeg"),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        const Text(
-                          "Jorge Paytan",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              letterSpacing: 1.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 3.0,
-                        ),
-                        const Text(
-                          "145789632",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              letterSpacing: 1.0,
-                              fontWeight: FontWeight.normal),
-                        )
-                      ],
+                  DottedBorder(
+                    borderType: BorderType.RRect,
+                    radius: const Radius.circular(255),
+                    padding: const EdgeInsets.all(6),
+                    color: Colors.blue,
+                    strokeWidth: 2,
+                    dashPattern: const [8, 8],
+                    strokeCap: StrokeCap.round,
+                    child: const CircleAvatar(
+                      radius: 50.0,
+                      backgroundImage: AssetImage("assets/avatar_test.jpeg"),
                     ),
                   ),
                   const SizedBox(
-                    height: 40.0,
+                    height: 10.0,
                   ),
+                  const Text(
+                    "Jorge Paytan",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 3.0,
+                  ),
+                  const Text(
+                    "Estudiante",
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.normal),
+                  )
                 ],
               ),
             ),
             const SizedBox(
-              height: 20.0,
+              height: 40.0,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Descripción general",
                     style: TextStyle(
                         fontSize: 18.0,
                         color: kBrandBlack,
                         fontWeight: FontWeight.w800),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20.0,
                   ),
-                  CardNavigationWidget()
+                  CardNavigationWidget(
+                    color: kBrandBlack,
+                    icon: Icons.people_alt_rounded,
+                    text: "Datos personales",
+                  ),
+                  CardNavigationWidget(
+                    color: kBrandBlack,
+                    icon: Icons.settings,
+                    text: "Preferencia",
+                  ),
+                  CardNavigationWidget(
+                    color: kBrandBlack,
+                    icon: Icons.app_shortcut,
+                    text: "Acerca de",
+                  ),
+                  CardNavigationWidget(
+                    color: kBrandGray,
+                    icon: Icons.logout_rounded,
+                    text: "Cerrar sesión",
+                    isPage: true,
+                  ),
+                  const SizedBox(
+                    height: 50.0,
+                  ),
+                  ButtonDecorationWidget(
+                    icon: Icons.headphones,
+                    text: '¿Como ponemos ayudarte?',
+                  )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

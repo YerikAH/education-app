@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -6,11 +8,13 @@ class CardPageWidget extends StatelessWidget {
   String page;
   Color colorIcon;
   bool? marginRigth;
+  Widget widget;
   CardPageWidget(
       {super.key,
       required this.icon,
       required this.page,
       required this.colorIcon,
+      required this.widget,
       this.marginRigth});
 
   @override
@@ -34,7 +38,10 @@ class CardPageWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0))),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => widget));
+        },
         child: SizedBox(
           width: double.infinity,
           child: Column(

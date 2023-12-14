@@ -1,60 +1,29 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:education/model/rol_model.dart';
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class CardCourseWidget extends StatefulWidget {
   String title;
   String text;
-  String image;
   String date;
   String hour;
-  String? rol;
+  String rol;
   CardCourseWidget(
       {super.key,
       required this.title,
       required this.text,
-      required this.image,
       required this.date,
       required this.hour,
-      this.rol});
+      required this.rol});
 
   @override
   State<CardCourseWidget> createState() => _CardCourseWidgetState();
 }
 
 class _CardCourseWidgetState extends State<CardCourseWidget> {
-  List<Color> selectColorByRol() {
-    Color colorStrong = Colors.pink;
-    Color colorLight = Colors.pink[300]!;
-    switch (widget.rol) {
-      case "ciencias":
-        colorStrong = Colors.orange;
-        colorLight = Colors.orange[300]!;
-        break;
-      case "matematicas":
-        colorStrong = Colors.red;
-        colorLight = Colors.red[300]!;
-        break;
-      case "pensamiento":
-        colorStrong = Colors.blue;
-        colorLight = Colors.blue[300]!;
-        break;
-      case "general":
-        colorStrong = Colors.purple;
-        colorLight = Colors.purple[300]!;
-        break;
-      case "arte":
-        colorStrong = Colors.yellow;
-        colorLight = Colors.yellow[300]!;
-        break;
-      case "lectura":
-        colorStrong = Colors.green;
-        colorLight = Colors.green[300]!;
-        break;
-      default:
-    }
-    setState(() {});
-    return [colorStrong, colorLight];
-  }
+  RolModel rolModel = RolModel();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +32,7 @@ class _CardCourseWidgetState extends State<CardCourseWidget> {
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: selectColorByRol()[0],
+        color: rolModel.selectColorByRol(widget.rol)[0],
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
@@ -78,7 +47,7 @@ class _CardCourseWidgetState extends State<CardCourseWidget> {
                 color: kBrandWhite,
               ),
               child: Image.asset(
-                widget.image,
+                rolModel.selectImageByRol(widget.rol),
               ),
             ),
             const SizedBox(
@@ -89,7 +58,7 @@ class _CardCourseWidgetState extends State<CardCourseWidget> {
                 SizedBox(
                   width: 55.0,
                   child: Badge(
-                    backgroundColor: selectColorByRol()[1],
+                    backgroundColor: rolModel.selectColorByRol(widget.rol)[1],
                     label: Text(widget.date, overflow: TextOverflow.ellipsis),
                   ),
                 ),
@@ -99,7 +68,7 @@ class _CardCourseWidgetState extends State<CardCourseWidget> {
                 SizedBox(
                   width: 55.0,
                   child: Badge(
-                    backgroundColor: selectColorByRol()[1],
+                    backgroundColor: rolModel.selectColorByRol(widget.rol)[1],
                     label: Text(
                       widget.hour,
                       overflow: TextOverflow.ellipsis,

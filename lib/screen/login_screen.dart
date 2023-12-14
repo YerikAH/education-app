@@ -161,7 +161,7 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
             const Text(
-              "Build by TID 2023",
+              "Desarrollado por TID 2023",
               style: TextStyle(
                   color: Colors.blue,
                   fontSize: 12.0,

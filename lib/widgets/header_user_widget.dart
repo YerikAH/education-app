@@ -1,3 +1,8 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:education/screen/home_screen.dart';
+import 'package:education/screen/notice_screen.dart';
+import 'package:education/screen/profile_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_page_widget.dart';
 import 'package:flutter/material.dart';
@@ -53,26 +58,32 @@ class HeaderUserWidget extends StatelessWidget {
             children: [
               TableRow(children: [
                 CardPageWidget(
-                    icon: Icons.person_2_outlined,
-                    page: "Tú",
-                    colorIcon: Colors.purple[300]!,
-                    marginRigth: true),
+                  icon: Icons.person_2_outlined,
+                  page: "Tú",
+                  colorIcon: Colors.purple[300]!,
+                  marginRigth: true,
+                  widget: ProfileScreen(),
+                ),
                 CardPageWidget(
                   icon: Icons.credit_card_outlined,
                   page: "Carnet",
                   colorIcon: Colors.blue[200]!,
+                  widget: const HomeScreen(),
                 )
               ]),
               TableRow(children: [
                 CardPageWidget(
-                    icon: Icons.school_outlined,
-                    page: "Comunicados",
-                    colorIcon: Colors.orange[300]!,
-                    marginRigth: true),
+                  icon: Icons.school_outlined,
+                  page: "Comunicados",
+                  colorIcon: Colors.orange[300]!,
+                  marginRigth: true,
+                  widget: const NoticeScreen(),
+                ),
                 CardPageWidget(
                   icon: Icons.star_border_rounded,
                   page: "Academico",
                   colorIcon: Colors.red[300]!,
+                  widget: const HomeScreen(),
                 )
               ])
             ],

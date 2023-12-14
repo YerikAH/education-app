@@ -1,7 +1,8 @@
-import 'package:education/screen/home_screen.dart';
+import 'package:education/screen/calendar_screen.dart';
 import 'package:education/screen/login_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/screen/profile_screen.dart';
+import 'package:education/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Colegio Orion',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: "NunitoSans",
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
               cursorColor: Colors.blue,
               selectionColor: Colors.blue[100],
               selectionHandleColor: Colors.blue)),
-      home: ProfileScreen(),
+      home: const HomeScreen(),
     );
   }
 }

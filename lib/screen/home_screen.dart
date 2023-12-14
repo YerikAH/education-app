@@ -35,7 +35,6 @@ class HomeScreen extends StatelessWidget {
                   text:
                       "Lorem impsum dolor is simply dummy text of the printing.",
                   date: "Aug 27",
-                  image: "assets/atomo.png",
                   hour: "12:00AM",
                   rol: "pensamiento",
                 ),
@@ -47,7 +46,6 @@ class HomeScreen extends StatelessWidget {
                   text:
                       "Lorem impsum dolor is simply dummy text of the printing.",
                   date: "Aug 27",
-                  image: "assets/lectura.png",
                   hour: "12:00AM",
                   rol: "lectura",
                 ),
@@ -59,7 +57,6 @@ class HomeScreen extends StatelessWidget {
                   text:
                       "Lorem impsum dolor is simply dummy text of the printing.",
                   date: "Aug 27",
-                  image: "assets/lectura.png",
                   hour: "12:00AM",
                   rol: "general",
                 ),
@@ -71,7 +68,6 @@ class HomeScreen extends StatelessWidget {
                   text:
                       "Lorem impsum dolor is simply dummy text of the printing.",
                   date: "Aug 27",
-                  image: "assets/arte.png",
                   hour: "12:00AM",
                   rol: "ciencias",
                 ),
@@ -83,7 +79,6 @@ class HomeScreen extends StatelessWidget {
                   text:
                       "Lorem impsum dolor is simply dummy text of the printing.",
                   date: "Aug 27",
-                  image: "assets/lectura.png",
                   hour: "12:00AM",
                   rol: "matematicas",
                 ),
@@ -107,35 +102,29 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 10.0,
           ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Table(
-                children: [
-                  TableRow(children: [
-                    CardCourseButtonWidget(
-                        image: "assets/computacion.png", title: "Programación"),
-                    CardCourseButtonWidget(
-                        image: "assets/geometria.png", title: "Geometria"),
-                    CardCourseButtonWidget(
-                        image: "assets/matematica.png", title: "Matematica")
-                  ]),
-                  TableRow(children: [
-                    CardCourseButtonWidget(
-                        image: "assets/arte.png", title: "Arte"),
-                    CardCourseButtonWidget(
-                        image: "assets/anatomia.png", title: "Anatomia"),
-                    CardCourseButtonWidget(
-                        image: "assets/filosofia.png", title: "Filosofia")
-                  ]),
-                  TableRow(children: [
-                    CardCourseButtonWidget(
-                        image: "assets/lectura.png", title: "Lectura"),
-                    Container(),
-                    Container()
-                  ]),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Table(
+              children: [
+                TableRow(children: [
+                  CardCourseButtonWidget(
+                      rol: "ciencias", title: "Programación"),
+                  CardCourseButtonWidget(
+                      rol: "matematicas", title: "Geometria"),
+                  CardCourseButtonWidget(
+                      rol: "pensamiento", title: "Matematica")
+                ]),
+                TableRow(children: [
+                  CardCourseButtonWidget(rol: "pensamiento", title: "Arte"),
+                  CardCourseButtonWidget(rol: "lectura", title: "Anatomia"),
+                  CardCourseButtonWidget(rol: "general", title: "Filosofia")
+                ]),
+                TableRow(children: [
+                  CardCourseButtonWidget(rol: "arte", title: "Lectura"),
+                  Container(),
+                  Container()
+                ]),
+              ],
             ),
           )
         ]),
