@@ -1,7 +1,6 @@
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_notice_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
-import 'package:education/widgets/custom_bottom_navigator.dart';
 import 'package:flutter/material.dart';
 
 class NoticeScreen extends StatelessWidget {
@@ -102,7 +101,6 @@ class NoticeScreen extends StatelessWidget {
           ]),
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavigator(),
     );
   }
 }

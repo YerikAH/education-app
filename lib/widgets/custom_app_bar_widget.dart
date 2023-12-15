@@ -15,6 +15,7 @@ class CustomAppBarWidget extends StatelessWidget
       backgroundColor: kBrandWhite,
       shadowColor: Colors.black38,
       surfaceTintColor: kBrandWhite,
+      centerTitle: true,
       title: Text(
         title,
         style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),

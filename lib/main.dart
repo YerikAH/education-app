@@ -1,11 +1,10 @@
-import 'package:education/screen/calendar_screen.dart';
-import 'package:education/screen/login_screen.dart';
-import 'package:education/screen/notice_screen.dart';
-import 'package:education/screen/profile_screen.dart';
-import 'package:education/screen/home_screen.dart';
+import 'package:education/screen/one_notice_screen.dart';
+import 'package:education/screen/routing_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
               cursorColor: Colors.blue,
               selectionColor: Colors.blue[100],
               selectionHandleColor: Colors.blue)),
-      home: const HomeScreen(),
+      home: const OneNoticeScreen(),
     );
   }
 }

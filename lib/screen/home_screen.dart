@@ -4,7 +4,6 @@ import 'package:education/widgets/header_user_widget.dart';
 import 'package:education/widgets/section_separator.dart';
 import 'package:education/widgets/title_show_widget.dart';
 import 'package:education/widgets/card_course_button_widget.dart';
-import 'package:education/widgets/custom_bottom_navigator.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -129,7 +128,6 @@ class HomeScreen extends StatelessWidget {
           )
         ]),
       ),
-      bottomNavigationBar: const CustomBottomNavigator(),
     );
   }
 }

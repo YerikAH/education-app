@@ -9,21 +9,21 @@ final kEvents = LinkedHashMap<DateTime, List<String>>(
 
 final Map<DateTime, List<String>> exampleObject = {
   DateTime.utc(2023, 12, 1): [
-    '{"rol": "ciencia", "hora": "10:00 PM", "curso": "Matematica", "profesor": "Cesar Alvarez"}',
-    '{"rol": "ciencia", "hora": "10:00 PM", "curso": "Ciencias","profesor": "Cesar Alvarez"}'
+    '{"rol": "ciencias", "hora": "10:00 PM", "curso": "Matematica", "profesor": "Cesar Alvarez"}',
+    '{"rol": "matematicas", "hora": "10:00 PM", "curso": "Ciencias","profesor": "Cesar Alvarez"}'
   ],
   DateTime.utc(2023, 12, 5): [
-    '{"rol": "ciencia", "hora": "10:00 PM", "curso": "Ingles","profesor": "Cesar Alvarez"}',
-    '{"rol": "ciencia", "hora": "10:00 PM", "curso": "Filosofia","profesor": "Cesar Alvarez"}'
+    '{"rol": "general", "hora": "10:00 PM", "curso": "Ingles","profesor": "Cesar Alvarez"}',
+    '{"rol": "pensamiento", "hora": "10:00 PM", "curso": "Filosofia","profesor": "Cesar Alvarez"}'
   ],
   DateTime.utc(2023, 12, 9): [
-    '{"rol": "ciencia", "hora": "10:00 PM", "curso": "Comunicación","profesor": "Cesar Alvarez"}',
-    '{"rol": "ciencia", "hora": "10:00 PM", "curso": "Musica","profesor": "Cesar Alvarez"}'
+    '{"rol": "general", "hora": "10:00 PM", "curso": "Comunicación","profesor": "Cesar Alvarez"}',
+    '{"rol": "arte", "hora": "10:00 PM", "curso": "Musica","profesor": "Cesar Alvarez"}'
   ],
   DateTime.utc(2023, 12, 13): [
-    '{"rol": "ciencia", "hora": "10:00 PM", "curso": "Deporte","profesor": "Cesar Alvarez"}',
-    '{"rol": "ciencia", "hora": "10:00 PM", "curso": "Arte","profesor": "Cesar Alvarez"}',
-    '{"rol": "ciencia", "hora": "12:00 PM", "curso": "Quimica","profesor": "Julio Alvarez"}'
+    '{"rol": "lectura", "hora": "10:00 PM", "curso": "Deporte","profesor": "Cesar Alvarez"}',
+    '{"rol": "ciencias", "hora": "10:00 PM", "curso": "Arte","profesor": "Cesar Alvarez"}',
+    '{"rol": "general", "hora": "12:00 PM", "curso": "Quimica","profesor": "Julio Alvarez"}'
   ],
 };
 

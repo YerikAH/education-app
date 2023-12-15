@@ -15,11 +15,11 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBrandWhite,
+      appBar: CustomAppBarWidget(title: "Perfil"),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomAppBarWidget(title: "Perfil"),
             SizedBox(
               width: double.infinity,
               child: Column(
@@ -113,7 +113,6 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavigator(),
     );
   }
 }

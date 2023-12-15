@@ -3,6 +3,7 @@
 import 'package:education/screen/home_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/screen/profile_screen.dart';
+import 'package:education/screen/ratings_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_page_widget.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class HeaderUserWidget extends StatelessWidget {
                   page: "Tú",
                   colorIcon: Colors.purple[300]!,
                   marginRigth: true,
-                  widget: ProfileScreen(),
+                  widget: const ProfileScreen(),
                 ),
                 CardPageWidget(
                   icon: Icons.credit_card_outlined,
@@ -83,7 +84,7 @@ class HeaderUserWidget extends StatelessWidget {
                   icon: Icons.star_border_rounded,
                   page: "Academico",
                   colorIcon: Colors.red[300]!,
-                  widget: const HomeScreen(),
+                  widget: const RatingsScreen(),
                 )
               ])
             ],

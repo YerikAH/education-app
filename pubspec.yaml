@@ -38,6 +38,10 @@ dependencies:
   dotted_border: ^2.1.0
   table_calendar: ^3.0.9
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.7
+  flutter_widget_from_html: ^0.14.9
+  cached_network_image: ^3.3.0
+  skeletons: ^0.0.3
 
 dev_dependencies:
   flutter_test:
@@ -55,8 +59,22 @@ dev_dependencies:
 flutter_icons:
   android: "colegio_orion"
   ios: false
-  image_path: "assets/public/logo.png"
-  adaptive_icon_background: "#FFFFFF"
+  image_path: "assets/splashDP.png"
+  adaptive_icon_background: "#2196F3"
+
+flutter_native_splash:
+  android: true
+  ios: false
+  web: false
+  color: "#2196F3"
+  image: "assets/splashx4.png"
+  color_dark: "#2196F3"
+  image_dark: "assets/splashx4.png"
+  android_12:
+    image: "assets/splashx4.png"
+    color: "#2196F3"
+    color_dark: "#2196F3"
+    image_dark: "assets/splashx4.png"
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -92,6 +110,5 @@ flutter:
         - asset: assets/fonts/NunitoSans_ExtraBold.ttf
         - asset: assets/fonts/NunitoSans_Black.ttf
 
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

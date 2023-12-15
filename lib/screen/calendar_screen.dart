@@ -63,11 +63,11 @@ class _CalendarScrennState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBrandWhite,
+      appBar: CustomAppBarWidget(title: "Calendario"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CustomAppBarWidget(title: "Calendario"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: TableCalendar<String>(
@@ -163,6 +163,7 @@ class _CalendarScrennState extends State<CalendarScreen> {
                       teacher: dataObject["profesor"],
                       time: dataObject["hora"],
                       title: dataObject["curso"],
+                      rol: dataObject["rol"],
                     );
                   },
                 );
@@ -171,7 +172,6 @@ class _CalendarScrennState extends State<CalendarScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: const CustomBottomNavigator(),
     );
   }
 }
