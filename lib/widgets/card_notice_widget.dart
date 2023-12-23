@@ -1,12 +1,20 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:education/screen/one_notice_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class CardNoticeWidget extends StatelessWidget {
   String title;
   String text;
-  CardNoticeWidget({Key? key, required this.text, required this.title})
+  String categoria;
+  String id;
+  CardNoticeWidget(
+      {Key? key,
+      required this.text,
+      required this.title,
+      required this.categoria,
+      required this.id})
       : super(
           key: key,
         );
@@ -17,7 +25,10 @@ class CardNoticeWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const OneNoticeScreen()));
+        },
         style: TextButton.styleFrom(
             backgroundColor: kBrandWhite,
             foregroundColor: kBrandBlack,

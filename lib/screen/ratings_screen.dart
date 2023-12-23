@@ -1,3 +1,4 @@
+import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_current_section_widget.dart';
 import 'package:education/widgets/card_rating_widget.dart';
@@ -71,7 +72,10 @@ class RatingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kBrandWhite,
-        appBar: CustomAppBarWidget(title: "Mis cursos"),
+        appBar: CustomAppBarWidget(
+          title: "Mis cursos",
+          beforeWidget: const RoutingScreen(),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [

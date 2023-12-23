@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               cursorColor: Colors.blue,
               selectionColor: Colors.blue[100],
               selectionHandleColor: Colors.blue)),
-      home: const OneNoticeScreen(),
+      home: const RoutingScreen(),
     );
   }
 }

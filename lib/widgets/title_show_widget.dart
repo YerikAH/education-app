@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 class TitleShowWidget extends StatelessWidget {
   String title;
   String button;
-  TitleShowWidget({super.key, required this.title, required this.button});
+  Widget widget;
+  TitleShowWidget(
+      {super.key,
+      required this.title,
+      required this.button,
+      required this.widget});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,10 @@ class TitleShowWidget extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: kBrandBlack,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => widget));
+              },
               child: Text(
                 button,
                 style: const TextStyle(

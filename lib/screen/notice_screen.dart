@@ -1,3 +1,4 @@
+import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_notice_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
@@ -12,6 +13,7 @@ class NoticeScreen extends StatelessWidget {
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
         title: "Comunicados",
+        beforeWidget: const RoutingScreen(),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -23,80 +25,8 @@ class NoticeScreen extends StatelessWidget {
             CardNoticeWidget(
               text: 'Descripción de una noticia',
               title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text:
-                  'Descripción de una noticiaDescripción de una noticiaDescripción de una noticiaDescripción de una noticiaDescripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            CardNoticeWidget(
-              text: 'Descripción de una noticia',
-              title: 'Titulo de una noticia',
-            ),
-            const SizedBox(
-              height: 20.0,
+              categoria: 'noticia',
+              id: '3',
             ),
           ]),
         ),

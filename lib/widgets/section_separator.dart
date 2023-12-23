@@ -7,11 +7,13 @@ class SectionSeparator extends StatelessWidget {
   String title;
   String text;
   String button;
+  Widget widget;
   SectionSeparator(
       {super.key,
       required this.title,
       required this.text,
-      required this.button});
+      required this.button,
+      required this.widget});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,10 @@ class SectionSeparator extends StatelessWidget {
               SizedBox(
                 width: 110.0,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => widget));
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: kBrandWhite,
                     backgroundColor: Colors.blue,

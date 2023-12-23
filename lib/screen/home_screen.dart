@@ -1,3 +1,6 @@
+import 'package:education/screen/calendar_screen.dart';
+import 'package:education/screen/notice_screen.dart';
+import 'package:education/screen/ratings_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_course_widget.dart';
 import 'package:education/widgets/header_user_widget.dart';
@@ -19,7 +22,11 @@ class HomeScreen extends StatelessWidget {
             height: 80.0,
           ),
           HeaderUserWidget(user: "Harvey"),
-          TitleShowWidget(title: "Proximos Cursos", button: "Ver todos"),
+          TitleShowWidget(
+            title: "Proximos Cursos",
+            button: "Ver todos",
+            widget: const CalendarScreen(),
+          ),
           const SizedBox(
             height: 10.0,
           ),
@@ -93,11 +100,15 @@ class HomeScreen extends StatelessWidget {
           SectionSeparator(
               title: "Nuestras Noticias",
               text: "Descrubre lo nuevo",
-              button: "Ver"),
+              button: "Ver",
+              widget: const NoticeScreen()),
           const SizedBox(
             height: 10.0,
           ),
-          TitleShowWidget(title: "Mis cursos", button: "Ver todos"),
+          TitleShowWidget(
+              title: "Mis cursos",
+              button: "Ver todos",
+              widget: const RatingsScreen()),
           const SizedBox(
             height: 10.0,
           ),

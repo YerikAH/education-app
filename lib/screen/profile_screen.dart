@@ -1,9 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/button_decoration_widget.dart';
 import 'package:education/widgets/card_navigation_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
-import 'package:education/widgets/custom_bottom_navigator.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -15,7 +15,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBrandWhite,
-      appBar: CustomAppBarWidget(title: "Perfil"),
+      appBar: CustomAppBarWidget(
+        title: "Perfil",
+        beforeWidget: const RoutingScreen(),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

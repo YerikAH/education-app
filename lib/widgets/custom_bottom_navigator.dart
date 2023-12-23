@@ -1,7 +1,5 @@
-import 'package:education/screen/calendar_screen.dart';
-import 'package:education/screen/home_screen.dart';
-import 'package:education/screen/login_screen.dart';
-import 'package:education/screen/notice_screen.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +25,7 @@ class CustomBottomNavigator extends StatelessWidget {
         BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_outlined), label: "Calendario"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.people_alt_outlined), label: "Compañeros"),
+            icon: Icon(Icons.link_rounded), label: "Enlaces"),
         BottomNavigationBarItem(
             icon: Icon(Icons.settings_outlined), label: "Ajustes"),
       ],

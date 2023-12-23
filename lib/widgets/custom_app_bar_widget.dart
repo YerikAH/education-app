@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 class CustomAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   String title;
-  CustomAppBarWidget({Key? key, required this.title}) : super(key: key);
+  Widget beforeWidget;
+  CustomAppBarWidget(
+      {Key? key, required this.title, required this.beforeWidget})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,11 @@ class CustomAppBarWidget extends StatelessWidget
         style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
       ),
       leading: IconButton(
-          onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => beforeWidget));
+          },
+          icon: const Icon(Icons.arrow_back_ios_new_rounded)),
     );
   }
 

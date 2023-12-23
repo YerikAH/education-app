@@ -1,10 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'dart:collection';
+import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_calendar_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
-import 'package:education/widgets/custom_bottom_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import './utils.dart';
@@ -63,7 +63,10 @@ class _CalendarScrennState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBrandWhite,
-      appBar: CustomAppBarWidget(title: "Calendario"),
+      appBar: CustomAppBarWidget(
+        title: "Calendario",
+        beforeWidget: const RoutingScreen(),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
