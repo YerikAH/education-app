@@ -8,11 +8,13 @@ class CardNavigationWidget extends StatelessWidget {
   String text;
   IconData icon;
   bool? isPage;
+  Widget widget;
   CardNavigationWidget(
       {Key? key,
       required this.color,
       required this.text,
       required this.icon,
+      required this.widget,
       this.isPage})
       : super(key: key);
 
@@ -22,7 +24,10 @@ class CardNavigationWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => widget));
+        },
         style: TextButton.styleFrom(
             backgroundColor: kBrandWhite,
             foregroundColor: kBrandBlack,

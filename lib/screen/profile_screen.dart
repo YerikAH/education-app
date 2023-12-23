@@ -1,4 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:education/screen/about_screen.dart';
+import 'package:education/screen/info_user_screen.dart';
 import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/button_decoration_widget.dart';
@@ -86,22 +88,26 @@ class ProfileScreen extends StatelessWidget {
                     color: kBrandBlack,
                     icon: Icons.people_alt_rounded,
                     text: "Datos personales",
+                    widget: const InfoUserScreen(),
                   ),
                   CardNavigationWidget(
                     color: kBrandBlack,
                     icon: Icons.settings,
                     text: "Preferencia",
+                    widget: const RoutingScreen(),
                   ),
                   CardNavigationWidget(
                     color: kBrandBlack,
                     icon: Icons.app_shortcut,
                     text: "Acerca de",
+                    widget: const AboutScreen(),
                   ),
                   CardNavigationWidget(
                     color: kBrandGray,
                     icon: Icons.logout_rounded,
                     text: "Cerrar sesión",
                     isPage: true,
+                    widget: const RoutingScreen(),
                   ),
                   const SizedBox(
                     height: 50.0,
