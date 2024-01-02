@@ -29,6 +29,7 @@ class _CardCourseWidgetState extends State<CardCourseWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: 270.0,
+      margin: const EdgeInsets.only(right: 20.0),
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),

@@ -1,4 +1,9 @@
 class Constant {
+  static Uri urlTidWeb = Uri.parse('https://tid.com.pe/');
+  static Uri urlTidWhatsApp = Uri.parse(
+      'https://api.whatsapp.com/send/?phone=51904221760&text&type=phone_number&app_absent=0');
+  static Uri urlTidFacebook = Uri.parse('https://www.facebook.com/TIDHuancayo');
+
   static Uri urlNoticias = Uri.parse('https://wa.me/51933611019');
   static Uri urlSitioWeb = Uri.parse('https://wa.me/51933611019');
   static Uri urlSistema = Uri.parse('https://wa.me/51933611019');

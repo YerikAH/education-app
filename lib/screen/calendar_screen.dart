@@ -1,11 +1,14 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'dart:collection';
+import 'package:education/helpers/helpers.dart';
+import 'package:education/providers/user_provider.dart';
 import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_calendar_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import './utils.dart';
 import 'dart:convert';
@@ -18,6 +21,47 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScrennState extends State<CalendarScreen> {
+  late Map<DateTime, List<String>> kEvents;
+  late DateTime kToday;
+  Map<String, dynamic> calendarData = {};
+  Map<DateTime, List<String>> exampleObjectI = {};
+  Helpers helper = Helpers();
+
+  static int getHashCode(DateTime key) {
+    return key.day * 1000000 + key.month * 10000 + key.year;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    kToday = DateTime.now();
+
+    kEvents = LinkedHashMap<DateTime, List<String>>(
+      equals: isSameDay,
+      hashCode: getHashCode,
+    )..addAll(exampleObjectI);
+  }
+
+  final Map<DateTime, List<String>> exampleObject = {
+    DateTime.utc(2023, 12, 1): [
+      '{"rol": "ciencias", "hora": "10:00 PM", "curso": "Matematica", "profesor": "Cesar Alvarez"}',
+      '{"rol": "matematicas", "hora": "10:00 PM", "curso": "Ciencias","profesor": "Cesar Alvarez"}'
+    ],
+    DateTime.utc(2023, 12, 5): [
+      '{"rol": "general", "hora": "10:00 PM", "curso": "Ingles","profesor": "Cesar Alvarez"}',
+      '{"rol": "pensamiento", "hora": "10:00 PM", "curso": "Filosofia","profesor": "Cesar Alvarez"}'
+    ],
+    DateTime.utc(2023, 12, 9): [
+      '{"rol": "general", "hora": "10:00 PM", "curso": "Comunicación","profesor": "Cesar Alvarez"}',
+      '{"rol": "arte", "hora": "10:00 PM", "curso": "Musica","profesor": "Cesar Alvarez"}'
+    ],
+    DateTime.utc(2023, 12, 13): [
+      '{"rol": "lectura", "hora": "10:00 PM", "curso": "Deporte","profesor": "Cesar Alvarez"}',
+      '{"rol": "ciencias", "hora": "10:00 PM", "curso": "Arte","profesor": "Cesar Alvarez"}',
+      '{"rol": "general", "hora": "12:00 PM", "curso": "Quimica","profesor": "Julio Alvarez"}'
+    ],
+  };
+
   final ValueNotifier<List<String>> _selectedEvents = ValueNotifier([]);
   final Set<DateTime> _selectedDays = LinkedHashSet<DateTime>(
     equals: isSameDay,
@@ -61,11 +105,21 @@ class _CalendarScrennState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      calendarData = context.watch<UserProvider>().calendar["data"];
+      exampleObjectI = helper.convertJson(calendarData);
+      kEvents = LinkedHashMap<DateTime, List<String>>(
+        equals: isSameDay,
+        hashCode: getHashCode,
+      )..addAll(exampleObjectI);
+      print(kEvents);
+    });
     return Scaffold(
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
         title: "Calendario",
         beforeWidget: const RoutingScreen(),
+        leadingActive: false,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,12 +216,7 @@ class _CalendarScrennState extends State<CalendarScreen> {
                   itemBuilder: (context, index) {
                     String data = value[index];
                     Map<String, dynamic> dataObject = json.decode(data);
-                    return CardCalendarWidget(
-                      teacher: dataObject["profesor"],
-                      time: dataObject["hora"],
-                      title: dataObject["curso"],
-                      rol: dataObject["rol"],
-                    );
+                    return Text("Hola mundo");
                   },
                 );
               },

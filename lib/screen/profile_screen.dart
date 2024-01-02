@@ -1,18 +1,25 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dotted_border/dotted_border.dart';
+import 'package:education/helpers/helpers.dart';
 import 'package:education/screen/about_screen.dart';
 import 'package:education/screen/info_user_screen.dart';
+import 'package:education/screen/login_screen.dart';
 import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/button_decoration_widget.dart';
 import 'package:education/widgets/card_navigation_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/user_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({
+  ProfileScreen({
     Key? key,
   }) : super(key: key);
 
+  Helpers helper = Helpers();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +27,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: CustomAppBarWidget(
         title: "Perfil",
         beforeWidget: const RoutingScreen(),
+        leadingActive: true,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -46,9 +54,10 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const Text(
-                    "Jorge Paytan",
-                    style: TextStyle(
+                  Text(
+                    helper.toCapitalizeCase(
+                        context.watch<UserProvider>().user['data']['nombre']),
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold),
@@ -88,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                     color: kBrandBlack,
                     icon: Icons.people_alt_rounded,
                     text: "Datos personales",
-                    widget: const InfoUserScreen(),
+                    widget: InfoUserScreen(),
                   ),
                   CardNavigationWidget(
                     color: kBrandBlack,
@@ -107,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
                     icon: Icons.logout_rounded,
                     text: "Cerrar sesión",
                     isPage: true,
-                    widget: const RoutingScreen(),
+                    widget: const LoginScreen(),
                   ),
                   const SizedBox(
                     height: 50.0,

@@ -9,11 +9,13 @@ class CardNoticeWidget extends StatelessWidget {
   String text;
   String categoria;
   String id;
+  String date;
   CardNoticeWidget(
       {Key? key,
       required this.text,
       required this.title,
       required this.categoria,
+      required this.date,
       required this.id})
       : super(
           key: key,
@@ -26,8 +28,12 @@ class CardNoticeWidget extends StatelessWidget {
       width: double.infinity,
       child: TextButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const OneNoticeScreen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => OneNoticeScreen(
+                        id: id,
+                      )));
         },
         style: TextButton.styleFrom(
             backgroundColor: kBrandWhite,
@@ -88,9 +94,10 @@ class CardNoticeWidget extends StatelessWidget {
                     const SizedBox(
                       height: 5.0,
                     ),
-                    const Text(
-                      "27-08-2023",
-                      style: TextStyle(fontSize: 12.0, color: kBrandBlack),
+                    Text(
+                      date,
+                      style:
+                          const TextStyle(fontSize: 12.0, color: kBrandBlack),
                       textAlign: TextAlign.start,
                     )
                   ],

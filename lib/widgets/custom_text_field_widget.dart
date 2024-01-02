@@ -5,10 +5,12 @@ class CustomTextFieldWidget extends StatelessWidget {
   String hintText;
   TextEditingController controller;
   bool? isRequired;
+  bool isObscure;
   CustomTextFieldWidget(
       {super.key,
       required this.hintText,
       required this.controller,
+      required this.isObscure,
       this.isRequired});
 
   @override
@@ -17,7 +19,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       controller: controller,
       style: const TextStyle(color: Colors.black),
       cursorColor: Colors.blue,
-      obscureText: false,
+      obscureText: isObscure,
       enableInteractiveSelection: true,
       decoration: InputDecoration(
         labelStyle: const TextStyle(color: Colors.blue),

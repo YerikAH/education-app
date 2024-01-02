@@ -26,8 +26,6 @@ class CustomBottomNavigator extends StatelessWidget {
             icon: Icon(Icons.calendar_month_outlined), label: "Calendario"),
         BottomNavigationBarItem(
             icon: Icon(Icons.link_rounded), label: "Enlaces"),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined), label: "Ajustes"),
       ],
     );
   }

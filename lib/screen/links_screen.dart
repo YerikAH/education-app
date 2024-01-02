@@ -16,7 +16,10 @@ class LinksScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: kBrandWhite,
         appBar: CustomAppBarWidget(
-            title: "Enlaces", beforeWidget: const RoutingScreen()),
+          title: "Enlaces",
+          beforeWidget: const RoutingScreen(),
+          leadingActive: false,
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),

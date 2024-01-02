@@ -1,17 +1,60 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:education/constant/constant.dart';
-import 'package:education/screen/home_screen.dart';
+import 'package:education/preferences/preferences.dart';
+import 'package:education/screen/routing_screen.dart';
+import 'package:education/services/services.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/custom_button_widget.dart';
 import 'package:education/widgets/custom_text_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  bool error = false;
+  String errorMessage = "500: Error en la interfaz";
+  bool loader = false;
+
+  void handleLogin() async {
+    Service service = Service();
+    Preferences preferences = Preferences();
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        error = false;
+        loader = true;
+      });
+      Map<String, String> body = {
+        "user": _userController.text,
+        "password": _passwordController.text
+      };
+      Map<dynamic, dynamic> data = await service.loginUser(body);
+      if (data["status"] == 203) {
+        preferences.saveValue(data["user_id"].toString());
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const RoutingScreen()));
+      } else {
+        setState(() {
+          error = true;
+          errorMessage = "${data["status"]}: ${data["message"]}";
+        });
+      }
+      setState(() {
+        loader = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +107,7 @@ class LoginScreen extends StatelessWidget {
                       hintText: "Ingresa tu usuario",
                       controller: _userController,
                       isRequired: true,
+                      isObscure: false,
                     ),
                     const SizedBox(
                       height: 25.0,
@@ -82,6 +126,7 @@ class LoginScreen extends StatelessWidget {
                       hintText: "Ingresa tu contraseña",
                       controller: _passwordController,
                       isRequired: true,
+                      isObscure: true,
                     ),
                     SizedBox(
                       width: double.infinity,
@@ -105,16 +150,31 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    CustomButtonWidget(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()));
-                          }
-                        },
-                        text: "Ingresar")
+                    loader
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3,
+                              color: Colors.blue,
+                            ),
+                          )
+                        : CustomButtonWidget(
+                            onPressed: () => handleLogin(), text: "Ingresar"),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    error
+                        ? SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                              errorMessage,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.redAccent),
+                            ),
+                          )
+                        : const SizedBox()
                   ],
                 ),
               ),
@@ -133,7 +193,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {
-                      Uri uri = Constant.urlFacebook;
+                      Uri uri = Constant.urlTidFacebook;
                       launchUrl(uri, mode: LaunchMode.externalApplication);
                     },
                     icon: const Icon(
@@ -142,20 +202,11 @@ class LoginScreen extends StatelessWidget {
                     )),
                 IconButton(
                     onPressed: () {
-                      Uri uri = Constant.urlPhone;
+                      Uri uri = Constant.urlTidWhatsApp;
                       launchUrl(uri, mode: LaunchMode.externalApplication);
                     },
                     icon: const Icon(
-                      Icons.fmd_good_rounded,
-                      color: Colors.blue,
-                    )),
-                IconButton(
-                    onPressed: () {
-                      Uri uri = Constant.urlLocation;
-                      launchUrl(uri, mode: LaunchMode.externalApplication);
-                    },
-                    icon: const Icon(
-                      Icons.tiktok,
+                      Ionicons.logo_whatsapp,
                       color: Colors.blue,
                     )),
               ],

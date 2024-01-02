@@ -1,9 +1,11 @@
+import 'package:education/providers/user_provider.dart';
 import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_current_section_widget.dart';
 import 'package:education/widgets/card_rating_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RatingsScreen extends StatelessWidget {
   const RatingsScreen({Key? key}) : super(key: key);
@@ -70,11 +72,13 @@ class RatingsScreen extends StatelessWidget {
   };
   @override
   Widget build(BuildContext context) {
+    Map user = context.watch<UserProvider>().user['data'];
     return Scaffold(
         backgroundColor: kBrandWhite,
         appBar: CustomAppBarWidget(
           title: "Mis cursos",
           beforeWidget: const RoutingScreen(),
+          leadingActive: true,
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -88,12 +92,12 @@ class RatingsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CardCurrentSectionWidget(
-                        grade: rating["grado"]!,
+                        grade: user["grado"],
                         image: rating["image"]!,
                         number: rating["number"]!,
                         qualification: rating["nota"]!,
-                        section: rating["section"]!,
-                        student: rating["student"]!),
+                        section: user["seccion"],
+                        student: user["nombre"]),
                     const SizedBox(
                       height: 20.0,
                     ),

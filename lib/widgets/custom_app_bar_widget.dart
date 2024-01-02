@@ -7,8 +7,12 @@ class CustomAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   String title;
   Widget beforeWidget;
+  bool leadingActive;
   CustomAppBarWidget(
-      {Key? key, required this.title, required this.beforeWidget})
+      {Key? key,
+      required this.title,
+      required this.beforeWidget,
+      required this.leadingActive})
       : super(key: key);
 
   @override
@@ -23,12 +27,14 @@ class CustomAppBarWidget extends StatelessWidget
         title,
         style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
       ),
-      leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => beforeWidget));
-          },
-          icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+      leading: leadingActive == true
+          ? IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => beforeWidget));
+              },
+              icon: const Icon(Icons.arrow_back_ios_new_rounded))
+          : const SizedBox(),
     );
   }
 

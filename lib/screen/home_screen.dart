@@ -1,3 +1,7 @@
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
+
+import 'package:education/helpers/helpers.dart';
+import 'package:education/providers/user_provider.dart';
 import 'package:education/screen/calendar_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/screen/ratings_screen.dart';
@@ -8,12 +12,63 @@ import 'package:education/widgets/section_separator.dart';
 import 'package:education/widgets/title_show_widget.dart';
 import 'package:education/widgets/card_course_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+  Helpers helper = Helpers();
 
   @override
   Widget build(BuildContext context) {
+    List scheduleData = context.watch<UserProvider>().schedule["data"];
+    List coursesData = context.watch<UserProvider>().courses["data"];
+
+    List<TableRow> createRows() {
+      Map<int, List<Map<dynamic, dynamic>>> listaTransformada = {};
+      List<TableRow> tableRows = [];
+      for (int i = 0; i < coursesData.length; i++) {
+        int grupo = i ~/ 3;
+        listaTransformada.putIfAbsent(grupo, () => []);
+        listaTransformada[grupo]!.add(coursesData[i]);
+      }
+
+      for (int i = 0; i < listaTransformada.keys.toList().length; i++) {
+        List element = listaTransformada[i] as List;
+        List<Widget> widgets = [];
+        for (int k = 0; k < element.length; k++) {
+          bool next = false;
+          widgets.add(CardCourseButtonWidget(
+              rol: "pensamiento",
+              title: helper.toCapitalizeCase("${element[k]["nonbrecurso"]}")));
+          if (element.length == 1) {
+            widgets.add(Container());
+            widgets.add(Container());
+          } else if (element.length == 2) {
+            // ignore: dead_code
+            if (next) widgets.add(Container());
+            next = true;
+          }
+        }
+        tableRows.add(TableRow(children: widgets));
+      }
+
+      return tableRows;
+    }
+
+    List<Widget> createCardList() {
+      return scheduleData
+          .map((item) => CardCourseWidget(
+                rol: "pensamiento",
+                title: helper.toCapitalizeCase(item["curso"]),
+                text:
+                    "Curso enseñado por el maestro ${helper.toCapitalizeCase('${item["docente_nombre"]} ${item["docente_apellidos"]}')}",
+                date: helper.formatDateTime("${item["dia"]}"),
+                hour: helper.convertFormatHour("${item["inicio"]}"),
+              ))
+          .toList();
+    }
+
+    List<TableRow> tablerows = createRows();
     return Scaffold(
       backgroundColor: kBrandWhite,
       body: SingleChildScrollView(
@@ -21,10 +76,12 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 80.0,
           ),
-          HeaderUserWidget(user: "Harvey"),
+          HeaderUserWidget(
+              user: helper.returnFirstName(
+                  context.watch<UserProvider>().user["data"]["nombre"])),
           TitleShowWidget(
-            title: "Proximos Cursos",
-            button: "Ver todos",
+            title: "Proximas Clases",
+            button: "Ver calendario",
             widget: const CalendarScreen(),
           ),
           const SizedBox(
@@ -35,63 +92,20 @@ class HomeScreen extends StatelessWidget {
             width: double.infinity,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                CardCourseWidget(
-                  title: 'Quimica',
-                  text:
-                      "Lorem impsum dolor is simply dummy text of the printing.",
-                  date: "Aug 27",
-                  hour: "12:00AM",
-                  rol: "pensamiento",
-                ),
-                const SizedBox(
-                  width: 20.0,
-                ),
-                CardCourseWidget(
-                  title: 'Comunicación',
-                  text:
-                      "Lorem impsum dolor is simply dummy text of the printing.",
-                  date: "Aug 27",
-                  hour: "12:00AM",
-                  rol: "lectura",
-                ),
-                const SizedBox(
-                  width: 20.0,
-                ),
-                CardCourseWidget(
-                  title: 'Programación',
-                  text:
-                      "Lorem impsum dolor is simply dummy text of the printing.",
-                  date: "Aug 27",
-                  hour: "12:00AM",
-                  rol: "general",
-                ),
-                const SizedBox(
-                  width: 20.0,
-                ),
-                CardCourseWidget(
-                  title: 'Arte',
-                  text:
-                      "Lorem impsum dolor is simply dummy text of the printing.",
-                  date: "Aug 27",
-                  hour: "12:00AM",
-                  rol: "ciencias",
-                ),
-                const SizedBox(
-                  width: 20.0,
-                ),
-                CardCourseWidget(
-                  title: 'Matematica superior',
-                  text:
-                      "Lorem impsum dolor is simply dummy text of the printing.",
-                  date: "Aug 27",
-                  hour: "12:00AM",
-                  rol: "matematicas",
-                ),
-                const SizedBox(
-                  width: 20.0,
-                ),
-              ]),
+              child: Row(
+                children:
+                    context.watch<UserProvider>().schedule["data"].length == 0
+                        ? [
+                            CardCourseWidget(
+                                title: "No tienes clases",
+                                text:
+                                    "Si crees que es un error, comunicate con tus maestro",
+                                date: "",
+                                hour: "",
+                                rol: "pensamiento")
+                          ]
+                        : createCardList(),
+              ),
             ),
           ),
           const SizedBox(
@@ -107,7 +121,7 @@ class HomeScreen extends StatelessWidget {
           ),
           TitleShowWidget(
               title: "Mis cursos",
-              button: "Ver todos",
+              button: "Ver calificaciones",
               widget: const RatingsScreen()),
           const SizedBox(
             height: 10.0,
@@ -115,26 +129,7 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Table(
-              children: [
-                TableRow(children: [
-                  CardCourseButtonWidget(
-                      rol: "ciencias", title: "Programación"),
-                  CardCourseButtonWidget(
-                      rol: "matematicas", title: "Geometria"),
-                  CardCourseButtonWidget(
-                      rol: "pensamiento", title: "Matematica")
-                ]),
-                TableRow(children: [
-                  CardCourseButtonWidget(rol: "pensamiento", title: "Arte"),
-                  CardCourseButtonWidget(rol: "lectura", title: "Anatomia"),
-                  CardCourseButtonWidget(rol: "general", title: "Filosofia")
-                ]),
-                TableRow(children: [
-                  CardCourseButtonWidget(rol: "arte", title: "Lectura"),
-                  Container(),
-                  Container()
-                ]),
-              ],
+              children: tablerows,
             ),
           )
         ]),

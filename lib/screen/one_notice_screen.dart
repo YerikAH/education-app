@@ -1,23 +1,48 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, must_be_immutable
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:education/screen/notice_screen.dart';
+import 'package:education/services/services.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:skeletons/skeletons.dart';
 
-class OneNoticeScreen extends StatelessWidget {
-  const OneNoticeScreen({Key? key}) : super(key: key);
+import '../helpers/helpers.dart';
+
+class OneNoticeScreen extends StatefulWidget {
+  String id;
+  OneNoticeScreen({Key? key, required this.id}) : super(key: key);
+
+  @override
+  State<OneNoticeScreen> createState() => _OneNoticeScreenState();
+}
+
+class _OneNoticeScreenState extends State<OneNoticeScreen> {
+  Service service = Service();
+  Helpers helper = Helpers();
+  bool loader = true;
+  Map<dynamic, dynamic> notice = {};
 
   @override
   Widget build(BuildContext context) {
+    void getNotice() async {
+      Map<dynamic, dynamic> noticeData = await service.getNotice(widget.id);
+
+      setState(() {
+        notice = noticeData;
+        loader = false;
+      });
+    }
+
+    getNotice();
     return Scaffold(
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
         title: "Una increible noticia",
         beforeWidget: const NoticeScreen(),
+        leadingActive: true,
       ),
       body: SingleChildScrollView(
         child: Padding(

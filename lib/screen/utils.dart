@@ -1,6 +1,8 @@
 import 'dart:collection';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../providers/user_provider.dart';
+
 /// Using a [LinkedHashMap] is highly recommended if you decide to use a map.
 final kEvents = LinkedHashMap<DateTime, List<String>>(
   equals: isSameDay,

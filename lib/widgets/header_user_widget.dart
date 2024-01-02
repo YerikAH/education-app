@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:education/screen/home_screen.dart';
+import 'package:education/screen/license_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/screen/profile_screen.dart';
 import 'package:education/screen/ratings_screen.dart';
@@ -63,13 +64,13 @@ class HeaderUserWidget extends StatelessWidget {
                   page: "Tú",
                   colorIcon: Colors.purple[300]!,
                   marginRigth: true,
-                  widget: const ProfileScreen(),
+                  widget: ProfileScreen(),
                 ),
                 CardPageWidget(
                   icon: Icons.credit_card_outlined,
                   page: "Carnet",
                   colorIcon: Colors.blue[200]!,
-                  widget: const HomeScreen(),
+                  widget: const LicenseScreen(),
                 )
               ]),
               TableRow(children: [
