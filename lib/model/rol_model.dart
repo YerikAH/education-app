@@ -9,6 +9,7 @@ class RolModel {
       "general": [Colors.purple, Colors.purple[300]!],
       "arte": [Colors.yellow, Colors.yellow[300]!],
       "lectura": [Colors.green, Colors.green[300]!],
+      "error": [Colors.black45, Colors.black12]
     };
     return data[rol];
   }
@@ -20,7 +21,8 @@ class RolModel {
       "pensamiento": "assets/filosofia.png",
       "general": "assets/geografia.png",
       "arte": "assets/arte.png",
-      "lectura": "assets/lectura.png"
+      "lectura": "assets/lectura.png",
+      "error": "assets/error.png"
     };
     return data[rol];
   }

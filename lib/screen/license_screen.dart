@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:education/constant/constant.dart';
 import 'package:education/helpers/helpers.dart';
 import 'package:education/providers/user_provider.dart';
 import 'package:education/screen/routing_screen.dart';
@@ -41,6 +42,8 @@ class _LicenseScreenState extends State<LicenseScreen> {
     double screenWidth = MediaQuery.of(context).size.width - 60;
     double photoWidth = screenWidth / 2 - 10;
     Helpers help = Helpers();
+    String path = context.watch<UserProvider>().user['data']['imagen'];
+    String urlImage = "${Constant.serverImagesUser}$path";
     return Scaffold(
         backgroundColor: kBrandWhite,
         appBar: CustomAppBarWidget(
@@ -70,8 +73,7 @@ class _LicenseScreenState extends State<LicenseScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
                           child: CachedNetworkImage(
-                            imageUrl:
-                                "https://images.pexels.com/photos/19486301/pexels-photo-19486301/free-photo-of-mujer-modelo-en-pie-joven.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            imageUrl: urlImage,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => SkeletonAvatar(
                               style: SkeletonAvatarStyle(

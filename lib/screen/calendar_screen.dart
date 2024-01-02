@@ -112,7 +112,6 @@ class _CalendarScrennState extends State<CalendarScreen> {
         equals: isSameDay,
         hashCode: getHashCode,
       )..addAll(exampleObjectI);
-      print(kEvents);
     });
     return Scaffold(
       backgroundColor: kBrandWhite,
@@ -216,7 +215,12 @@ class _CalendarScrennState extends State<CalendarScreen> {
                   itemBuilder: (context, index) {
                     String data = value[index];
                     Map<String, dynamic> dataObject = json.decode(data);
-                    return Text("Hola mundo");
+
+                    return CardCalendarWidget(
+                        title: dataObject["curso"],
+                        time: dataObject["hora"],
+                        teacher: dataObject["profesor"],
+                        rol: "pensamiento");
                   },
                 );
               },

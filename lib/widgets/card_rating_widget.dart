@@ -1,3 +1,4 @@
+import 'package:education/helpers/helpers.dart';
 import 'package:education/model/rating_model.dart';
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -6,19 +7,18 @@ class CardRatingWidget extends StatelessWidget {
   String course;
   String teacher;
   String qualification;
-  String rol;
   String type;
   CardRatingWidget(
       {Key? key,
       required this.course,
       required this.teacher,
-      required this.rol,
       required this.qualification,
       required this.type})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Helpers helper = Helpers();
     RatingModel ratingModel = RatingModel();
     return Container(
       margin: const EdgeInsets.only(bottom: 20.0),
@@ -38,7 +38,7 @@ class CardRatingWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  course,
+                  helper.toCapitalizeCase(course),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -103,7 +103,7 @@ class CardRatingWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        teacher,
+                        helper.toCapitalizeCase(teacher),
                         style: const TextStyle(
                             color: kBrandBlack,
                             fontSize: 12.0,

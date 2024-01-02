@@ -126,4 +126,123 @@ class Helpers {
         "${dateTime.day.toString().padLeft(2, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.year}";
     return formattedDate;
   }
+
+  String removeHtmlTag(String input) {
+    return input.replaceAll(RegExp(r'<[^>]*>'), '');
+  }
+
+  List<Map<String, dynamic>> calcularPromedioPonderadoPorCurso(List lista) {
+    Map<String, Map<int, List<Map<String, dynamic>>>> gruposPorCurso = {};
+
+    for (var elemento in lista) {
+      String nombreCurso = elemento['nonbrecurso'];
+      int ordentipo = elemento['ordentipo'];
+
+      if (!gruposPorCurso.containsKey(nombreCurso)) {
+        gruposPorCurso[nombreCurso] = {};
+      }
+
+      if (!gruposPorCurso[nombreCurso]!.containsKey(ordentipo)) {
+        gruposPorCurso[nombreCurso]![ordentipo] = [];
+      }
+
+      gruposPorCurso[nombreCurso]![ordentipo]!.add(elemento);
+    }
+    //print(gruposPorCurso);
+    List<Map<String, dynamic>> resultado = [];
+
+    gruposPorCurso.forEach((nombreCurso, grupos) {
+      grupos.forEach((ordentipo, grupo) {
+        double sumaNotas = 0;
+        double sumaPuntajesPonderados = 0;
+        double sumaPesos = 0;
+        String profesor = "";
+        String tipo = "";
+
+        grupo.forEach((elemento) {
+          profesor = elemento["nombres"];
+          tipo = elemento["tipo"];
+          double peso =
+              elemento['puntajes'].toDouble(); // Convertir a double aquí
+          double nota = double.tryParse(elemento['nota_alum']) ??
+              0; // Convertir a double si es numérico
+          sumaNotas += nota;
+          sumaPuntajesPonderados += nota * peso;
+          sumaPesos += peso;
+        });
+
+        double promedioNotas = sumaNotas / grupo.length;
+        double promedioPonderado = sumaPuntajesPonderados / sumaPesos;
+
+        resultado.add({
+          "tipo": tipo,
+          "profesor": profesor,
+          "nonbrecurso": nombreCurso,
+          "ordentipo": ordentipo,
+          "promedio_notas": promedioNotas.toStringAsFixed(2),
+          "promedio_ponderado": promedioPonderado.toStringAsFixed(2),
+        });
+      });
+    });
+
+    return resultado;
+  }
+
+  double calcularPromedioPonderado(List lista) {
+    double sumaPromedioPonderado = 0;
+
+    for (var elemento in lista) {
+      sumaPromedioPonderado += double.parse(elemento['promedio_ponderado']);
+    }
+
+    return sumaPromedioPonderado / lista.length;
+  }
+
+  String convertirDecimalARomano(int numeroDecimal) {
+    if (numeroDecimal < 1 || numeroDecimal > 3999) {
+      return "Número fuera del rango válido (1-3999)";
+    }
+
+    List<String> simbolosRomanos = [
+      "I",
+      "IV",
+      "V",
+      "IX",
+      "X",
+      "XL",
+      "L",
+      "XC",
+      "C",
+      "CD",
+      "D",
+      "CM",
+      "M"
+    ];
+    List<int> valoresDecimales = [
+      1,
+      4,
+      5,
+      9,
+      10,
+      40,
+      50,
+      90,
+      100,
+      400,
+      500,
+      900,
+      1000
+    ];
+
+    String resultado = "";
+
+    for (int i = 12; i >= 0; i--) {
+      while (numeroDecimal >= valoresDecimales[i]) {
+        resultado += simbolosRomanos[i];
+        numeroDecimal -= valoresDecimales[i];
+      }
+    }
+
+    return resultado;
+  }
 }

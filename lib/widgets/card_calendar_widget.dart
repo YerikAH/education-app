@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:education/helpers/helpers.dart';
 import 'package:education/model/rol_model.dart';
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class CardCalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Helpers helper = Helpers();
     RolModel rolModel = RolModel();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 7.0),
@@ -50,14 +52,14 @@ class CardCalendarWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    helper.toCapitalizeCase(title),
                     style: const TextStyle(
                         fontSize: 18.0,
                         color: kBrandWhite,
                         fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    teacher,
+                    helper.toCapitalizeCase(teacher),
                     style: const TextStyle(
                         fontSize: 16.0,
                         color: kBrandWhite,
@@ -68,7 +70,7 @@ class CardCalendarWidget extends StatelessWidget {
             ],
           ),
           Text(
-            time,
+            helper.convertFormatHour(time),
             textAlign: TextAlign.right,
             style: const TextStyle(
                 fontSize: 16.0,

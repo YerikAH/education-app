@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:education/helpers/helpers.dart';
 import 'package:education/screen/one_notice_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class CardNoticeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Helpers helper = Helpers();
     Size screenSize = MediaQuery.of(context).size;
     return SizedBox(
       width: double.infinity,
@@ -33,6 +35,7 @@ class CardNoticeWidget extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => OneNoticeScreen(
                         id: id,
+                        titleNav: title,
                       )));
         },
         style: TextButton.styleFrom(
@@ -83,7 +86,7 @@ class CardNoticeWidget extends StatelessWidget {
                       height: 5.0,
                     ),
                     Text(
-                      text,
+                      helper.removeHtmlTag(text),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: const TextStyle(

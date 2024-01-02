@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:education/constant/constant.dart';
 import 'package:education/helpers/helpers.dart';
 import 'package:education/screen/about_screen.dart';
 import 'package:education/screen/info_user_screen.dart';
@@ -12,6 +14,7 @@ import 'package:education/widgets/card_navigation_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletons/skeletons.dart';
 import '../providers/user_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -22,6 +25,8 @@ class ProfileScreen extends StatelessWidget {
   Helpers helper = Helpers();
   @override
   Widget build(BuildContext context) {
+    String path = context.watch<UserProvider>().user['data']['imagen'];
+    String urlImage = "${Constant.serverImagesUser}$path";
     return Scaffold(
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
@@ -46,9 +51,23 @@ class ProfileScreen extends StatelessWidget {
                     strokeWidth: 2,
                     dashPattern: const [8, 8],
                     strokeCap: StrokeCap.round,
-                    child: const CircleAvatar(
-                      radius: 50.0,
-                      backgroundImage: AssetImage("assets/avatar_test.jpeg"),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(255.0),
+                      child: CachedNetworkImage(
+                        imageUrl: urlImage,
+                        fit: BoxFit.cover,
+                        width: 100.0,
+                        height: 100.0,
+                        placeholder: (context, url) => SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                              width: 100.0,
+                              height: 100.0,
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(255.0)),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -98,12 +117,6 @@ class ProfileScreen extends StatelessWidget {
                     icon: Icons.people_alt_rounded,
                     text: "Datos personales",
                     widget: InfoUserScreen(),
-                  ),
-                  CardNavigationWidget(
-                    color: kBrandBlack,
-                    icon: Icons.settings,
-                    text: "Preferencia",
-                    widget: const RoutingScreen(),
                   ),
                   CardNavigationWidget(
                     color: kBrandBlack,

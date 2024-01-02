@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print, must_be_immutable
-
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:education/constant/constant.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/services/services.dart';
 import 'package:education/themes/colors.dart';
@@ -13,7 +13,9 @@ import '../helpers/helpers.dart';
 
 class OneNoticeScreen extends StatefulWidget {
   String id;
-  OneNoticeScreen({Key? key, required this.id}) : super(key: key);
+  String titleNav;
+  OneNoticeScreen({Key? key, required this.id, required this.titleNav})
+      : super(key: key);
 
   @override
   State<OneNoticeScreen> createState() => _OneNoticeScreenState();
@@ -23,16 +25,30 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
   Service service = Service();
   Helpers helper = Helpers();
   bool loader = true;
-  Map<dynamic, dynamic> notice = {};
+  Map<dynamic, dynamic> notice = {
+    "message": "",
+    "status": 404,
+    "data": {
+      "titulo": "",
+      "portada": "",
+      "descripcion": "",
+      "fechaCreacion": "",
+      "imagen": "",
+      "usu_nombre": ""
+    }
+  };
 
   @override
   Widget build(BuildContext context) {
+    String urlImage = "${Constant.serverImagesUser}${notice["data"]["imagen"]}";
+    String urlPortada = "";
     void getNotice() async {
       Map<dynamic, dynamic> noticeData = await service.getNotice(widget.id);
 
       setState(() {
         notice = noticeData;
         loader = false;
+        urlPortada = "${notice["data"]["portada"]}";
       });
     }
 
@@ -40,7 +56,7 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
     return Scaffold(
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
-        title: "Una increible noticia",
+        title: widget.titleNav,
         beforeWidget: const NoticeScreen(),
         leadingActive: true,
       ),
@@ -51,15 +67,15 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Skeleton(
-                isLoading: false,
+                isLoading: loader,
                 skeleton: SkeletonLine(
                     style: SkeletonLineStyle(
                         width: 200.0,
                         height: 16.0,
                         borderRadius: BorderRadius.circular(5.0))),
-                child: const Text(
-                  "Una increible noticia",
-                  style: TextStyle(
+                child: Text(
+                  "${notice["data"]["titulo"]}",
+                  style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w900,
                       color: kBrandBlack),
@@ -77,8 +93,7 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(200.0),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            "https://images.pexels.com/photos/19486301/pexels-photo-19486301/free-photo-of-mujer-modelo-en-pie-joven.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                        imageUrl: urlImage,
                         fit: BoxFit.cover,
                         placeholder: (context, url) => SkeletonAvatar(
                           style: SkeletonAvatarStyle(
@@ -96,18 +111,19 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                     width: 10.0,
                   ),
                   Container(
-                    child: true
-                        ? const Column(
+                    child: !loader
+                        ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Jose Vargas",
-                                style: TextStyle(
+                                "${notice["data"]["usu_nombre"]}",
+                                style: const TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w800,
                                     color: kBrandBlack),
                               ),
-                              Text("15-11-23")
+                              Text(helper.formatOnlyDate(
+                                  "${notice["data"]["fechaCreacion"]}"))
                             ],
                           )
                         : const Column(
@@ -138,8 +154,7 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: CachedNetworkImage(
-                    imageUrl:
-                        'http://images.pexels.com/photos/19011374/pexels-photo-19011374/free-photo-of-nieve-casas-edificio-montana.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                    imageUrl: urlPortada,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => SkeletonAvatar(
                       style: SkeletonAvatarStyle(
@@ -156,7 +171,7 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                 height: 30.0,
               ),
               Container(
-                child: false
+                child: loader
                     ? SkeletonParagraph(
                         style: SkeletonParagraphStyle(
                             lines: 10,
@@ -170,9 +185,7 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                             )),
                       )
                     : HtmlWidget(
-                        '''
-                  <div id="content" class="mt-5 mb-5"><p class="ql-align-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ullamcorper lacus iaculis tortor efficitur, vel luctus lorem pharetra. Duis elit odio, rutrum sed justo vitae, volutpat lobortis tellus. Sed eget justo posuere, tincidunt purus ut, rutrum libero. Pellentesque purus eros, sagittis vel interdum nec, efficitur vitae lectus. Praesent nec lectus convallis, placerat sem at, tempus nulla. Aenean pharetra mi a sapien porta aliquam. Cras lorem ante, venenatis vitae enim ultricies, dignissim aliquam urna. Curabitur nec nunc ac ante sollicitudin efficitur vel ac tortor. Ut consectetur dui nec imperdiet consequat. Nunc interdum arcu non venenatis maximus. Aliquam ornare viverra turpis, eu placerat nisl semper ut. Mauris iaculis mi velit, nec egestas mi lacinia id.</p><p class="ql-align-justify">Integer blandit placerat sem, vel venenatis risus suscipit a. Etiam dignissim suscipit arcu, ac suscipit eros scelerisque vitae. Suspendisse mollis tortor vitae magna facilisis scelerisque. Duis dapibus dignissim erat sed ullamcorper. Nulla facilisi. Vestibulum tempus facilisis nisl ut porttitor. Curabitur eget lobortis lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam ut tristique nibh, sed vehicula sapien.</p><p><br></p></div>
-                ''',
+                        "${notice["data"]["descripcion"]}",
                         customStylesBuilder: (element) {
                           if (element.classes.contains('foo')) {
                             return {'color': 'red'};

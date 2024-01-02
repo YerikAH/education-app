@@ -84,32 +84,12 @@ class LinksScreen extends StatelessWidget {
                           )),
                       IconButton(
                           onPressed: () {
-                            Uri uri = Constant.urlTikTok;
-                            launchUrl(uri,
-                                mode: LaunchMode.externalApplication);
-                          },
-                          icon: const Icon(
-                            Icons.tiktok_rounded,
-                            color: kBrandBlack,
-                          )),
-                      IconButton(
-                          onPressed: () {
                             Uri uri = Constant.urlPhone;
                             launchUrl(uri,
                                 mode: LaunchMode.externalApplication);
                           },
                           icon: const Icon(
                             Ionicons.logo_whatsapp,
-                            color: kBrandBlack,
-                          )),
-                      IconButton(
-                          onPressed: () {
-                            Uri uri = Constant.urlInstagram;
-                            launchUrl(uri,
-                                mode: LaunchMode.externalApplication);
-                          },
-                          icon: const Icon(
-                            Ionicons.logo_instagram,
                             color: kBrandBlack,
                           )),
                     ],

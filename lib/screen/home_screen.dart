@@ -8,6 +8,7 @@ import 'package:education/screen/ratings_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_course_widget.dart';
 import 'package:education/widgets/header_user_widget.dart';
+import 'package:education/widgets/no_data_widget.dart';
 import 'package:education/widgets/section_separator.dart';
 import 'package:education/widgets/title_show_widget.dart';
 import 'package:education/widgets/card_course_button_widget.dart';
@@ -99,10 +100,10 @@ class HomeScreen extends StatelessWidget {
                             CardCourseWidget(
                                 title: "No tienes clases",
                                 text:
-                                    "Si crees que es un error, comunicate con tus maestro",
+                                    "Si crees que es un error, comunicate con tus maestros",
                                 date: "",
                                 hour: "",
-                                rol: "pensamiento")
+                                rol: "error")
                           ]
                         : createCardList(),
               ),
@@ -128,9 +129,11 @@ class HomeScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Table(
-              children: tablerows,
-            ),
+            child: context.watch<UserProvider>().courses["data"].length == 0
+                ? NoDataWidget(message: "No tienes cursos registrados.")
+                : Table(
+                    children: tablerows,
+                  ),
           )
         ]),
       ),

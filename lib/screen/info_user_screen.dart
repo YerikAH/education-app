@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:education/constant/constant.dart';
 import 'package:education/helpers/helpers.dart';
 import 'package:education/providers/user_provider.dart';
 import 'package:education/screen/profile_screen.dart';
@@ -6,12 +8,15 @@ import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:education/widgets/info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletons/skeletons.dart';
 
 class InfoUserScreen extends StatelessWidget {
   InfoUserScreen({Key? key}) : super(key: key);
   Helpers helper = Helpers();
   @override
   Widget build(BuildContext context) {
+    String path = context.watch<UserProvider>().user['data']['imagen'];
+    String urlImage = "${Constant.serverImagesUser}$path";
     return Scaffold(
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
@@ -32,9 +37,23 @@ class InfoUserScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CircleAvatar(
-                      radius: 50.0,
-                      backgroundImage: AssetImage("assets/avatar_test.jpeg"),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(255.0),
+                      child: CachedNetworkImage(
+                        imageUrl: urlImage,
+                        fit: BoxFit.cover,
+                        width: 100.0,
+                        height: 100.0,
+                        placeholder: (context, url) => SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                              width: 100.0,
+                              height: 100.0,
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(255.0)),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                     const SizedBox(
                       height: 10.0,

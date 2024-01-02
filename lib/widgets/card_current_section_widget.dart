@@ -133,7 +133,7 @@ class CardCurrentSectionWidget extends StatelessWidget {
                     height: 40.0,
                     child: CircleAvatar(
                       radius: 50.0,
-                      backgroundImage: AssetImage(image),
+                      backgroundImage: NetworkImage(image),
                     ),
                   )
                 ],
