@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:education/helpers/helpers.dart';
 import 'package:education/model/rating_model.dart';
 import 'package:education/themes/colors.dart';

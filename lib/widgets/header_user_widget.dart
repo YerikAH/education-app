@@ -1,6 +1,4 @@
 // ignore_for_file: must_be_immutable
-
-import 'package:education/screen/home_screen.dart';
 import 'package:education/screen/license_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/screen/profile_screen.dart';
