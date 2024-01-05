@@ -1,3 +1,4 @@
+import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class LoaderScreen extends StatelessWidget {
@@ -6,6 +7,7 @@ class LoaderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: kBrandWhite,
       body: Center(
         child: CircularProgressIndicator(
           color: Colors.blue,

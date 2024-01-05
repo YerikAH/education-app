@@ -27,8 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool loader = false;
 
   void handleLogin() async {
-    Service service = Service();
     Preferences preferences = Preferences();
+    Service service = Service();
     if (_formKey.currentState!.validate()) {
       setState(() {
         error = false;
@@ -57,169 +57,177 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: SingleChildScrollView(
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 100.0,
+                      ),
+                      SizedBox(
+                        width: 100.0,
+                        child: Image.asset('assets/logo.png'),
+                      ),
+                      const SizedBox(
+                        height: 50.0,
+                      ),
+                      const Text(
+                        "Ingresa",
+                        style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: kBrandBlack),
+                      ),
+                      const Text(
+                        "Hola, Bienvenido de nuevo 👋",
+                        style: TextStyle(fontSize: 14.0, color: kBrandGray),
+                      ),
+                      const SizedBox(
+                        height: 30.0,
+                      ),
+                      const Text(
+                        "Nombre de usuario",
+                        style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: kBrandBlack),
+                      ),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      CustomTextFieldWidget(
+                        hintText: "Ingresa tu usuario",
+                        controller: _userController,
+                        isRequired: true,
+                        isObscure: false,
+                      ),
+                      const SizedBox(
+                        height: 25.0,
+                      ),
+                      const Text(
+                        "Contraseña",
+                        style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: kBrandBlack),
+                      ),
+                      const SizedBox(
+                        height: 5.0,
+                      ),
+                      CustomTextFieldWidget(
+                        hintText: "Ingresa tu contraseña",
+                        controller: _passwordController,
+                        isRequired: true,
+                        isObscure: true,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                    foregroundColor: Colors.blue),
+                                onPressed: () {
+                                  launchUrl(Constant.urlContact,
+                                      mode: LaunchMode.externalApplication);
+                                },
+                                child: const Text(
+                                  "¿Olvidaste tu contraseña?",
+                                  style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blue),
+                                )),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      loader
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                strokeWidth: 3,
+                                color: Colors.blue,
+                              ),
+                            )
+                          : CustomButtonWidget(
+                              onPressed: () => handleLogin(), text: "Ingresar"),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      error
+                          ? SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                errorMessage,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent),
+                              ),
+                            )
+                          : const SizedBox()
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.white,
+          height: 90,
+          elevation: 0,
           child: Column(
             children: [
-              Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 100.0,
-                    ),
-                    SizedBox(
-                      width: 100.0,
-                      child: Image.asset('assets/logo.png'),
-                    ),
-                    const SizedBox(
-                      height: 50.0,
-                    ),
-                    const Text(
-                      "Ingresa",
-                      style: TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold,
-                          color: kBrandBlack),
-                    ),
-                    const Text(
-                      "Hola, Bienvenido de nuevo 👋",
-                      style: TextStyle(fontSize: 14.0, color: kBrandGray),
-                    ),
-                    const SizedBox(
-                      height: 30.0,
-                    ),
-                    const Text(
-                      "Nombre de usuario",
-                      style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                          color: kBrandBlack),
-                    ),
-                    const SizedBox(
-                      height: 5.0,
-                    ),
-                    CustomTextFieldWidget(
-                      hintText: "Ingresa tu usuario",
-                      controller: _userController,
-                      isRequired: true,
-                      isObscure: false,
-                    ),
-                    const SizedBox(
-                      height: 25.0,
-                    ),
-                    const Text(
-                      "Contraseña",
-                      style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                          color: kBrandBlack),
-                    ),
-                    const SizedBox(
-                      height: 5.0,
-                    ),
-                    CustomTextFieldWidget(
-                      hintText: "Ingresa tu contraseña",
-                      controller: _passwordController,
-                      isRequired: true,
-                      isObscure: true,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          TextButton(
-                              style: TextButton.styleFrom(
-                                  foregroundColor: Colors.blue),
-                              onPressed: () {},
-                              child: const Text(
-                                "¿Olvidaste tu contraseña?",
-                                style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.blue),
-                              )),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    loader
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 3,
-                              color: Colors.blue,
-                            ),
-                          )
-                        : CustomButtonWidget(
-                            onPressed: () => handleLogin(), text: "Ingresar"),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    error
-                        ? SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              errorMessage,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.redAccent),
-                            ),
-                          )
-                        : const SizedBox()
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Uri uri = Constant.urlTidFacebook;
+                        launchUrl(uri, mode: LaunchMode.externalApplication);
+                      },
+                      icon: const Icon(
+                        Icons.facebook,
+                        color: Colors.blue,
+                      )),
+                  IconButton(
+                      onPressed: () {
+                        Uri uri = Constant.urlTidWhatsApp;
+                        launchUrl(uri, mode: LaunchMode.externalApplication);
+                      },
+                      icon: const Icon(
+                        Ionicons.logo_whatsapp,
+                        color: Colors.blue,
+                      )),
+                ],
+              ),
+              const Text(
+                "Desarrollado por TID 2023",
+                style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        height: 90,
-        elevation: 0,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Uri uri = Constant.urlTidFacebook;
-                      launchUrl(uri, mode: LaunchMode.externalApplication);
-                    },
-                    icon: const Icon(
-                      Icons.facebook,
-                      color: Colors.blue,
-                    )),
-                IconButton(
-                    onPressed: () {
-                      Uri uri = Constant.urlTidWhatsApp;
-                      launchUrl(uri, mode: LaunchMode.externalApplication);
-                    },
-                    icon: const Icon(
-                      Ionicons.logo_whatsapp,
-                      color: Colors.blue,
-                    )),
-              ],
-            ),
-            const Text(
-              "Desarrollado por TID 2023",
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-          ],
         ),
       ),
     );

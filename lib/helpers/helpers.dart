@@ -111,7 +111,7 @@ class Helpers {
           int.parse(dateParts[1]), int.parse(dateParts[0]));
 
       List<String> convertedList = value.map<String>((item) {
-        return '{"rol": "${item['curso']}", "hora": "${item['final']}", "curso": "${item['curso']}","profesor": "${item['docente_nombre']} ${item['docente_apellidos']}"}';
+        return '{"rol": "${item['rol']}", "hora": "${item['final']}", "curso": "${item['curso']}","profesor": "${item['docente_nombre']} ${item['docente_apellidos']}"}';
       }).toList();
 
       convertedMap[date] = convertedList;
@@ -244,5 +244,26 @@ class Helpers {
     }
 
     return resultado;
+  }
+
+  String obtenerDiaSemana(int numero) {
+    switch (numero) {
+      case 1:
+        return 'Lunes';
+      case 2:
+        return 'Martes';
+      case 3:
+        return 'Miércoles';
+      case 4:
+        return 'Jueves';
+      case 5:
+        return 'Viernes';
+      case 6:
+        return 'Sábado';
+      case 7:
+        return 'Domingo';
+      default:
+        return 'Número inválido';
+    }
   }
 }

@@ -32,25 +32,31 @@ class _RoutingScreenState extends State<RoutingScreen> {
     });
   }
 
+  void getUserInfo() async {
+    String id = await preferences.returnValue();
+    Map<dynamic, dynamic> userData = await service.getUser(id);
+    Map<dynamic, dynamic> coursesData = await service.getCourses(id);
+    Map<dynamic, dynamic> ratingsData = await service.getRatings(id);
+    Map<dynamic, dynamic> scheduleData = await service.getSchedule(id);
+    Map<dynamic, dynamic> calendarData = await service.getCalendar(id);
+
+    context.read<UserProvider>().setCourses(coursesData);
+    context.read<UserProvider>().setRatings(ratingsData);
+    context.read<UserProvider>().setUser(userData);
+    context.read<UserProvider>().setSchedule(scheduleData);
+    context.read<UserProvider>().setCalendar(calendarData);
+    setState(() => loader = false);
+    print("ejecucio´n0");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
-    void getUserInfo() async {
-      String id = await preferences.returnValue();
-      Map<dynamic, dynamic> userData = await service.getUser(id);
-      Map<dynamic, dynamic> coursesData = await service.getCourses(id);
-      Map<dynamic, dynamic> ratingsData = await service.getRatings(id);
-      Map<dynamic, dynamic> scheduleData = await service.getSchedule(id);
-      Map<dynamic, dynamic> calendarData = await service.getCalendar(id);
-
-      context.read<UserProvider>().setCourses(coursesData);
-      context.read<UserProvider>().setRatings(ratingsData);
-      context.read<UserProvider>().setUser(userData);
-      context.read<UserProvider>().setSchedule(scheduleData);
-      context.read<UserProvider>().setCalendar(calendarData);
-      setState(() => loader = false);
-    }
-
-    getUserInfo();
     return Scaffold(
       body: loader
           ? const LoaderScreen()

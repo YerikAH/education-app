@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
         for (int k = 0; k < element.length; k++) {
           bool next = false;
           widgets.add(CardCourseButtonWidget(
-              rol: "pensamiento",
+              rol: element[k]["rol"],
               title: helper.toCapitalizeCase("${element[k]["nonbrecurso"]}")));
           if (element.length == 1) {
             widgets.add(Container());
@@ -56,20 +56,20 @@ class HomeScreen extends StatelessWidget {
       return tableRows;
     }
 
+    List<TableRow> tablerows = createRows();
     List<Widget> createCardList() {
       return scheduleData
           .map((item) => CardCourseWidget(
-                rol: "pensamiento",
+                rol: item["rol"],
                 title: helper.toCapitalizeCase(item["curso"]),
                 text:
                     "Curso enseñado por el maestro ${helper.toCapitalizeCase('${item["docente_nombre"]} ${item["docente_apellidos"]}')}",
-                date: helper.formatDateTime("${item["dia"]}"),
+                date: helper.obtenerDiaSemana(item["dia"]),
                 hour: helper.convertFormatHour("${item["inicio"]}"),
               ))
           .toList();
     }
 
-    List<TableRow> tablerows = createRows();
     return Scaffold(
       backgroundColor: kBrandWhite,
       body: SingleChildScrollView(

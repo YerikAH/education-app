@@ -1,9 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:education/helpers/helpers.dart';
 import 'package:education/model/rating_model.dart';
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletons/skeletons.dart';
 
 class CardCurrentSectionWidget extends StatelessWidget {
   String section;
@@ -133,9 +135,25 @@ class CardCurrentSectionWidget extends StatelessWidget {
                   SizedBox(
                     width: 40.0,
                     height: 40.0,
-                    child: CircleAvatar(
-                      radius: 50.0,
-                      backgroundImage: NetworkImage(image),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(255.0),
+                      child: CachedNetworkImage(
+                        imageUrl: image,
+                        fit: BoxFit.cover,
+                        width: 40.0,
+                        height: 40.0,
+                        placeholder: (context, url) => SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                              width: 40.0,
+                              height: 40.0,
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(255.0)),
+                        ),
+                        errorWidget: (context, url, error) => Image.asset(
+                          "assets/error_user.png",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   )
                 ],

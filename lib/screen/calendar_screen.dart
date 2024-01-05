@@ -7,7 +7,9 @@ import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_calendar_widget.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
+import 'package:education/widgets/no_data_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import './utils.dart';
@@ -40,6 +42,10 @@ class _CalendarScrennState extends State<CalendarScreen> {
       equals: isSameDay,
       hashCode: getHashCode,
     )..addAll(exampleObjectI);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 
   final Map<DateTime, List<String>> exampleObject = {
@@ -74,6 +80,11 @@ class _CalendarScrennState extends State<CalendarScreen> {
   @override
   void dispose() {
     _selectedEvents.dispose();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     super.dispose();
   }
 
@@ -113,6 +124,7 @@ class _CalendarScrennState extends State<CalendarScreen> {
         hashCode: getHashCode,
       )..addAll(exampleObjectI);
     });
+
     return Scaffold(
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
@@ -205,27 +217,34 @@ class _CalendarScrennState extends State<CalendarScreen> {
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w800),
             ),
           ),
-          Expanded(
-            child: ValueListenableBuilder<List<String>>(
-              valueListenable: _selectedEvents,
-              builder: (context, value, _) {
-                return ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    String data = value[index];
-                    Map<String, dynamic> dataObject = json.decode(data);
-
-                    return CardCalendarWidget(
-                        title: dataObject["curso"],
-                        time: dataObject["hora"],
-                        teacher: dataObject["profesor"],
-                        rol: "pensamiento");
-                  },
-                );
-              },
-            ),
-          ),
+          calendarData.isEmpty
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 30.0),
+                  child: NoDataWidget(
+                      message:
+                          "No tienes un horario registrado, comunícate con tus profesores si crees que se trata de un error."),
+                )
+              : Expanded(
+                  child: ValueListenableBuilder<List<String>>(
+                    valueListenable: _selectedEvents,
+                    builder: (context, value, _) {
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: value.length,
+                        itemBuilder: (context, index) {
+                          String data = value[index];
+                          Map<String, dynamic> dataObject = json.decode(data);
+                          return CardCalendarWidget(
+                              title: dataObject["curso"],
+                              time: dataObject["hora"],
+                              teacher: dataObject["profesor"],
+                              rol: dataObject["rol"]);
+                        },
+                      );
+                    },
+                  ),
+                ),
         ],
       ),
     );

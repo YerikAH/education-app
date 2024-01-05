@@ -162,8 +162,10 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                           height: 250.0,
                           borderRadius: BorderRadiusDirectional.circular(20.0)),
                     ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                    errorWidget: (context, url, error) => Image.asset(
+                      "assets/error_portada.png",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

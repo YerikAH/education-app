@@ -65,8 +65,10 @@ class ProfileScreen extends StatelessWidget {
                               borderRadius:
                                   BorderRadiusDirectional.circular(255.0)),
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        errorWidget: (context, url, error) => Image.asset(
+                          "assets/error_user.png",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -117,12 +119,14 @@ class ProfileScreen extends StatelessWidget {
                     icon: Icons.people_alt_rounded,
                     text: "Datos personales",
                     widget: InfoUserScreen(),
+                    closeSession: false,
                   ),
                   CardNavigationWidget(
                     color: kBrandBlack,
                     icon: Icons.app_shortcut,
                     text: "Acerca de",
                     widget: const AboutScreen(),
+                    closeSession: false,
                   ),
                   CardNavigationWidget(
                     color: kBrandGray,
@@ -130,12 +134,14 @@ class ProfileScreen extends StatelessWidget {
                     text: "Cerrar sesión",
                     isPage: true,
                     widget: const LoginScreen(),
+                    closeSession: true,
                   ),
                   const SizedBox(
                     height: 50.0,
                   ),
                   ButtonDecorationWidget(
                     icon: Icons.headphones,
+                    url: Constant.urlContact,
                     text: '¿Como ponemos ayudarte?',
                   )
                 ],

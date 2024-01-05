@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:education/preferences/preferences.dart';
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -9,15 +10,17 @@ class CardNavigationWidget extends StatelessWidget {
   IconData icon;
   bool? isPage;
   Widget widget;
+  bool closeSession;
   CardNavigationWidget(
       {Key? key,
       required this.color,
       required this.text,
       required this.icon,
       required this.widget,
+      required this.closeSession,
       this.isPage})
       : super(key: key);
-
+  Preferences preferences = Preferences();
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -25,8 +28,15 @@ class CardNavigationWidget extends StatelessWidget {
       width: double.infinity,
       child: TextButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => widget));
+          if (closeSession) {
+            preferences.saveValue("");
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => widget),
+            );
+          } else {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => widget));
+          }
         },
         style: TextButton.styleFrom(
             backgroundColor: kBrandWhite,

@@ -12,66 +12,6 @@ import 'package:provider/provider.dart';
 class RatingsScreen extends StatelessWidget {
   const RatingsScreen({Key? key}) : super(key: key);
 
-  static const lista = [
-    {
-      "rol": "ciencias",
-      "profesor": "María González",
-      "curso": "Física Cuántica",
-      "nota": "18.75",
-      "tipo": "ANUAL"
-    },
-    {
-      "rol": "ciencias",
-      "profesor": "Carlos Rodríguez",
-      "curso": "Biología Molecular",
-      "nota": "20.00",
-      "tipo": "SEMESTRAL"
-    },
-    {
-      "rol": "ciencias",
-      "profesor": "Ana Sánchez",
-      "curso": "Química Orgánica",
-      "nota": "11.89",
-      "tipo": "ANUAL"
-    },
-    {
-      "rol": "ciencias",
-      "profesor": "Juan Martínez",
-      "curso": "Matemáticas Avanzadas",
-      "nota": "09.45",
-      "tipo": "SEMESTRAL"
-    },
-    {
-      "rol": "ciencias",
-      "profesor": "Laura Pérez",
-      "curso": "Astrofísica",
-      "nota": "16.78",
-      "tipo": "ANUAL"
-    },
-    {
-      "rol": "ciencias",
-      "profesor": "Pedro Gómez",
-      "curso": "Estadísticas",
-      "nota": "20.00",
-      "tipo": "SEMESTRAL"
-    },
-    {
-      "rol": "ciencias",
-      "profesor": "Isabel López",
-      "curso": "Geología",
-      "nota": "18.92",
-      "tipo": "ANUAL"
-    }
-  ];
-
-  static const rating = {
-    "section": "ATD",
-    "number": "845",
-    "image": "assets/avatar_test.jpeg",
-    "student": "HARVEY YERIK",
-    "grado": "QUINTO SECUNDARIA",
-    "nota": "15.0"
-  };
   @override
   Widget build(BuildContext context) {
     Helpers helper = Helpers();
@@ -81,8 +21,6 @@ class RatingsScreen extends StatelessWidget {
     String ratingsFinal = "${helper.calcularPromedioPonderado(ratings)}";
     String path = context.watch<UserProvider>().user['data']['imagen'];
     String urlImage = "${Constant.serverImagesUser}$path";
-
-    print(ratings);
     return Scaffold(
         backgroundColor: kBrandWhite,
         appBar: CustomAppBarWidget(

@@ -6,6 +6,7 @@ import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/custom_app_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:skeletons/skeletons.dart';
@@ -24,8 +25,21 @@ class _LicenseScreenState extends State<LicenseScreen> {
   @override
   void initState() {
     super.initState();
-    // Actualiza la hora cada segundo
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     _updateTime();
+  }
+
+  @override
+  dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   void _updateTime() {
@@ -33,8 +47,7 @@ class _LicenseScreenState extends State<LicenseScreen> {
       _currentTime = DateFormat('HH:mm:ss').format(DateTime.now());
     });
 
-    // Actualiza la hora cada segundo
-    Future.delayed(Duration(seconds: 1), _updateTime);
+    Future.delayed(const Duration(seconds: 1), _updateTime);
   }
 
   @override
@@ -82,8 +95,10 @@ class _LicenseScreenState extends State<LicenseScreen> {
                                   borderRadius:
                                       BorderRadiusDirectional.circular(10.0)),
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+                            errorWidget: (context, url, error) => Image.asset(
+                              "assets/error_user.png",
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

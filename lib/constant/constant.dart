@@ -20,4 +20,6 @@ class Constant {
       Uri.parse('https://www.facebook.com/ieporion.tarmaperu/?locale=es_LA');
   static Uri urlPhone = Uri.parse(
       'https://api.whatsapp.com/send/?phone=51963920440&text&type=phone_number&app_absent=0');
+  static Uri urlContact =
+      Uri.parse("https://colegiosorion.edu.pe/views/contacto.php");
 }

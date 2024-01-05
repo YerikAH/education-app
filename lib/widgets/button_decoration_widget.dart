@@ -2,11 +2,14 @@
 
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ButtonDecorationWidget extends StatelessWidget {
   IconData icon;
   String text;
-  ButtonDecorationWidget({Key? key, required this.icon, required this.text})
+  Uri url;
+  ButtonDecorationWidget(
+      {Key? key, required this.icon, required this.text, required this.url})
       : super(key: key);
 
   @override
@@ -22,7 +25,9 @@ class ButtonDecorationWidget extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         ),
-        onPressed: () {},
+        onPressed: () {
+          launchUrl(url, mode: LaunchMode.externalApplication);
+        },
         child: Row(children: [
           Icon(
             icon,

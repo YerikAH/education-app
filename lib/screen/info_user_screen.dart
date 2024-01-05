@@ -53,8 +53,10 @@ class InfoUserScreen extends StatelessWidget {
                               borderRadius:
                                   BorderRadiusDirectional.circular(255.0)),
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        errorWidget: (context, url, error) => Image.asset(
+                          "assets/error_user.png",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     const SizedBox(
