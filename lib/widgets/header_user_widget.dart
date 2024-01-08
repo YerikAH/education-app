@@ -44,7 +44,12 @@ class HeaderUserWidget extends StatelessWidget {
                   ],
                 )),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NoticeScreen()));
+                },
                 icon: const Icon(
                   Icons.notifications,
                   color: kBrandBlack,

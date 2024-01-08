@@ -61,7 +61,7 @@ class _LicenseScreenState extends State<LicenseScreen> {
         backgroundColor: kBrandWhite,
         appBar: CustomAppBarWidget(
             title: 'Fotocheck',
-            beforeWidget: const RoutingScreen(),
+            beforeWidget: RoutingScreen(),
             leadingActive: true),
         body: SingleChildScrollView(
           child: Padding(

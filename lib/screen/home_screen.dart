@@ -5,6 +5,7 @@ import 'package:education/providers/user_provider.dart';
 import 'package:education/screen/calendar_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/screen/ratings_screen.dart';
+import 'package:education/screen/routing_screen.dart';
 import 'package:education/themes/colors.dart';
 import 'package:education/widgets/card_course_widget.dart';
 import 'package:education/widgets/header_user_widget.dart';
@@ -83,7 +84,9 @@ class HomeScreen extends StatelessWidget {
           TitleShowWidget(
             title: "Proximas Clases",
             button: "Ver calendario",
-            widget: const CalendarScreen(),
+            widget: RoutingScreen(
+              page: 1,
+            ),
           ),
           const SizedBox(
             height: 10.0,

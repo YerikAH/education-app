@@ -25,7 +25,7 @@ class RatingsScreen extends StatelessWidget {
         backgroundColor: kBrandWhite,
         appBar: CustomAppBarWidget(
           title: "Mis cursos",
-          beforeWidget: const RoutingScreen(),
+          beforeWidget: RoutingScreen(),
           leadingActive: true,
         ),
         body: SingleChildScrollView(
@@ -67,6 +67,7 @@ class RatingsScreen extends StatelessWidget {
                                 qualification: "${item['promedio_ponderado']}",
                                 type:
                                     "${helper.convertirDecimalARomano(item["ordentipo"])} ${item["tipo"]}",
+                                image: item['docente_foto'],
                               ))
                           .toList(),
                     )

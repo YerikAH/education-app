@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 import 'package:education/preferences/preferences.dart';
 import 'package:education/providers/user_provider.dart';
 import 'package:education/screen/calendar_screen.dart';
@@ -11,7 +11,8 @@ import 'package:provider/provider.dart';
 import '../services/services.dart';
 
 class RoutingScreen extends StatefulWidget {
-  const RoutingScreen({Key? key}) : super(key: key);
+  int? page;
+  RoutingScreen({Key? key, this.page}) : super(key: key);
   @override
   State<RoutingScreen> createState() => _RoutingScreenState();
 }
@@ -46,13 +47,16 @@ class _RoutingScreenState extends State<RoutingScreen> {
     context.read<UserProvider>().setSchedule(scheduleData);
     context.read<UserProvider>().setCalendar(calendarData);
     setState(() => loader = false);
-    print("ejecucio´n0");
   }
 
   @override
   void initState() {
     super.initState();
     getUserInfo();
+    if (widget.page != null) {
+      selectedIndex = widget.page as int;
+    }
+    setState(() {});
   }
 
   @override

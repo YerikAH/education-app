@@ -39,10 +39,11 @@ class _LoginScreenState extends State<LoginScreen> {
         "password": _passwordController.text
       };
       Map<dynamic, dynamic> data = await service.loginUser(body);
+
       if (data["status"] == 203) {
         preferences.saveValue(data["user_id"].toString());
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const RoutingScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => RoutingScreen()));
       } else {
         setState(() {
           error = true;

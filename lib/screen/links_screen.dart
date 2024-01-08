@@ -17,7 +17,7 @@ class LinksScreen extends StatelessWidget {
         backgroundColor: kBrandWhite,
         appBar: CustomAppBarWidget(
           title: "Enlaces",
-          beforeWidget: const RoutingScreen(),
+          beforeWidget: RoutingScreen(),
           leadingActive: false,
         ),
         body: SingleChildScrollView(

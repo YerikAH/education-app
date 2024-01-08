@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:education/constant/constant.dart';
 import 'package:education/helpers/helpers.dart';
 import 'package:education/model/rating_model.dart';
 import 'package:education/themes/colors.dart';
@@ -12,11 +13,13 @@ class CardRatingWidget extends StatelessWidget {
   String teacher;
   String qualification;
   String type;
+  String image;
   CardRatingWidget(
       {Key? key,
       required this.course,
       required this.teacher,
       required this.qualification,
+      required this.image,
       required this.type})
       : super(key: key);
 
@@ -131,7 +134,7 @@ class CardRatingWidget extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(255.0),
                       child: CachedNetworkImage(
-                        imageUrl: "",
+                        imageUrl: "${Constant.serverImagesUser}$image",
                         fit: BoxFit.cover,
                         width: 40.0,
                         height: 40.0,

@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
               cursorColor: Colors.blue,
               selectionColor: Colors.blue[100],
               selectionHandleColor: Colors.blue)),
-      home: login ? const RoutingScreen() : const LoginScreen(),
+      home: login ? RoutingScreen() : const LoginScreen(),
     );
   }
 }

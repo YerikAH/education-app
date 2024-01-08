@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
         title: "Perfil",
-        beforeWidget: const RoutingScreen(),
+        beforeWidget: RoutingScreen(),
         leadingActive: true,
       ),
       body: SingleChildScrollView(

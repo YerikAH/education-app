@@ -129,7 +129,7 @@ class _CalendarScrennState extends State<CalendarScreen> {
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
         title: "Calendario",
-        beforeWidget: const RoutingScreen(),
+        beforeWidget: RoutingScreen(),
         leadingActive: false,
       ),
       body: Column(

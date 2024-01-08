@@ -41,7 +41,7 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
   @override
   Widget build(BuildContext context) {
     String urlImage = "${Constant.serverImagesUser}${notice["data"]["imagen"]}";
-    String urlPortada = "";
+    String urlPortada = notice["data"]["portada"];
     void getNotice() async {
       Map<dynamic, dynamic> noticeData = await service.getNotice(widget.id);
 
@@ -102,8 +102,10 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                               borderRadius:
                                   BorderRadiusDirectional.circular(200.0)),
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        errorWidget: (context, url, error) => Image.asset(
+                          "assets/error_user.png",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -154,7 +156,7 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: CachedNetworkImage(
-                    imageUrl: urlPortada,
+                    imageUrl: "${Constant.serverBackgroundNotice}$urlPortada",
                     fit: BoxFit.cover,
                     placeholder: (context, url) => SkeletonAvatar(
                       style: SkeletonAvatarStyle(

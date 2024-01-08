@@ -1,7 +1,12 @@
 class Constant {
-  static Uri serverApi = Uri.parse('http://192.168.6.238/api_education/');
+  //static Uri serverApi = Uri.parse('https://apiapps-educaorion.tid.com.pe/');
+  // static String serverImagesUser =
+  //     'https://colegiosorion.edu.pe/sistema_gestion/imagenes/usuarios/';
+  static Uri serverApi = Uri.parse('http://192.168.6.230/api_education/');
   static String serverImagesUser =
-      'http://192.168.6.238/tid-academico/sistema_gestion/imagenes/usuarios/';
+      'http://192.168.6.230/tid-academico/sistema/imagenes/usuarios/';
+  static String serverBackgroundNotice =
+      'http://192.168.6.230/tid-academico/web/uploads/';
 
   static Uri urlTidWeb = Uri.parse('https://tid.com.pe/');
   static Uri urlTidWhatsApp = Uri.parse(
