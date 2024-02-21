@@ -205,6 +205,9 @@ class _OneNoticeScreenState extends State<OneNoticeScreen> {
                         textStyle: const TextStyle(fontSize: 14),
                       ),
               ),
+              const SizedBox(
+                height: 50.0,
+              ),
             ],
           ),
         ),

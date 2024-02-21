@@ -48,26 +48,6 @@ class _CalendarScrennState extends State<CalendarScreen> {
     ]);
   }
 
-  final Map<DateTime, List<String>> exampleObject = {
-    DateTime.utc(2023, 12, 1): [
-      '{"rol": "ciencias", "hora": "10:00 PM", "curso": "Matematica", "profesor": "Cesar Alvarez"}',
-      '{"rol": "matematicas", "hora": "10:00 PM", "curso": "Ciencias","profesor": "Cesar Alvarez"}'
-    ],
-    DateTime.utc(2023, 12, 5): [
-      '{"rol": "general", "hora": "10:00 PM", "curso": "Ingles","profesor": "Cesar Alvarez"}',
-      '{"rol": "pensamiento", "hora": "10:00 PM", "curso": "Filosofia","profesor": "Cesar Alvarez"}'
-    ],
-    DateTime.utc(2023, 12, 9): [
-      '{"rol": "general", "hora": "10:00 PM", "curso": "Comunicación","profesor": "Cesar Alvarez"}',
-      '{"rol": "arte", "hora": "10:00 PM", "curso": "Musica","profesor": "Cesar Alvarez"}'
-    ],
-    DateTime.utc(2023, 12, 13): [
-      '{"rol": "lectura", "hora": "10:00 PM", "curso": "Deporte","profesor": "Cesar Alvarez"}',
-      '{"rol": "ciencias", "hora": "10:00 PM", "curso": "Arte","profesor": "Cesar Alvarez"}',
-      '{"rol": "general", "hora": "12:00 PM", "curso": "Quimica","profesor": "Julio Alvarez"}'
-    ],
-  };
-
   final ValueNotifier<List<String>> _selectedEvents = ValueNotifier([]);
   final Set<DateTime> _selectedDays = LinkedHashSet<DateTime>(
     equals: isSameDay,
@@ -93,8 +73,6 @@ class _CalendarScrennState extends State<CalendarScreen> {
   }
 
   List<String> _getEventsForDays(Set<DateTime> days) {
-    // Implementation example
-    // Note that days are in selection order (same applies to events)
     return [
       for (final d in days) ..._getEventsForDay(d),
     ];
@@ -103,7 +81,6 @@ class _CalendarScrennState extends State<CalendarScreen> {
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     setState(() {
       _focusedDay = focusedDay;
-      // Update values in a Set
       if (_selectedDays.contains(selectedDay)) {
         _selectedDays.remove(selectedDay);
       } else {
@@ -212,7 +189,7 @@ class _CalendarScrennState extends State<CalendarScreen> {
             padding:
                 const EdgeInsets.only(bottom: 15, top: 15, left: 30, right: 30),
             child: const Text(
-              "Proximas clases",
+              "Tus clases de hoy",
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w800),
             ),
@@ -229,19 +206,25 @@ class _CalendarScrennState extends State<CalendarScreen> {
                   child: ValueListenableBuilder<List<String>>(
                     valueListenable: _selectedEvents,
                     builder: (context, value, _) {
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: value.length,
-                        itemBuilder: (context, index) {
-                          String data = value[index];
-                          Map<String, dynamic> dataObject = json.decode(data);
-                          return CardCalendarWidget(
-                              title: dataObject["curso"],
-                              time: dataObject["hora"],
-                              teacher: dataObject["profesor"],
-                              rol: dataObject["rol"]);
-                        },
-                      );
+                      return value.isEmpty
+                          ? NoDataWidget(
+                              message:
+                                  "Elige una fecha para visualizar las materias programadas para ese día.")
+                          : ListView.builder(
+                              padding: EdgeInsets.zero,
+                              itemCount: value.length,
+                              itemBuilder: (context, index) {
+                                String data = value[index];
+                                Map<String, dynamic> dataObject =
+                                    json.decode(data);
+
+                                return CardCalendarWidget(
+                                    title: dataObject["curso"],
+                                    time: dataObject["hora"],
+                                    teacher: dataObject["profesor"],
+                                    rol: dataObject["rol"]);
+                              },
+                            );
                     },
                   ),
                 ),

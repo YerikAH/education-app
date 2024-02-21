@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:education/screen/communications_screen.dart';
 import 'package:education/screen/license_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/screen/profile_screen.dart';
@@ -82,7 +83,7 @@ class HeaderUserWidget extends StatelessWidget {
                   page: "Comunicados",
                   colorIcon: Colors.orange[300]!,
                   marginRigth: true,
-                  widget: const NoticeScreen(),
+                  widget: const CommunicationsScreen(),
                 ),
                 CardPageWidget(
                   icon: Icons.star_border_rounded,

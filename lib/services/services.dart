@@ -101,7 +101,6 @@ class Service {
     var client = http.Client();
     String path = 'login.php?user=$user&password=$password';
     Uri url = Constant.serverApi.resolve(path);
-    print(url);
     try {
       var response = await client.get(url);
       Map<dynamic, dynamic> decodedResponse =

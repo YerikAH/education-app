@@ -67,7 +67,7 @@ class RatingsScreen extends StatelessWidget {
                                 qualification: "${item['promedio_ponderado']}",
                                 type:
                                     "${helper.convertirDecimalARomano(item["ordentipo"])} ${item["tipo"]}",
-                                image: item['docente_foto'],
+                                image: item["docente_foto"],
                               ))
                           .toList(),
                     )

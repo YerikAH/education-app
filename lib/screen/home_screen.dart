@@ -2,7 +2,6 @@
 
 import 'package:education/helpers/helpers.dart';
 import 'package:education/providers/user_provider.dart';
-import 'package:education/screen/calendar_screen.dart';
 import 'package:education/screen/notice_screen.dart';
 import 'package:education/screen/ratings_screen.dart';
 import 'package:education/screen/routing_screen.dart';

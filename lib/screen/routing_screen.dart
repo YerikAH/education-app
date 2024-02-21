@@ -35,6 +35,7 @@ class _RoutingScreenState extends State<RoutingScreen> {
 
   void getUserInfo() async {
     String id = await preferences.returnValue();
+
     Map<dynamic, dynamic> userData = await service.getUser(id);
     Map<dynamic, dynamic> coursesData = await service.getCourses(id);
     Map<dynamic, dynamic> ratingsData = await service.getRatings(id);
@@ -46,7 +47,8 @@ class _RoutingScreenState extends State<RoutingScreen> {
     context.read<UserProvider>().setUser(userData);
     context.read<UserProvider>().setSchedule(scheduleData);
     context.read<UserProvider>().setCalendar(calendarData);
-    setState(() => loader = false);
+    context.read<UserProvider>().setTdata(false);
+    // setState(() => loader = false);
   }
 
   @override
@@ -62,7 +64,7 @@ class _RoutingScreenState extends State<RoutingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: loader
+      body: context.watch<UserProvider>().tdata
           ? const LoaderScreen()
           : _widgetOptions.elementAt(selectedIndex),
       bottomNavigationBar: CustomBottomNavigator(

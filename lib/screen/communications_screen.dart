@@ -1,4 +1,5 @@
 // ignore_for_file: unused_element, prefer_iterable_wheretype
+
 import 'package:education/helpers/helpers.dart';
 import 'package:education/screen/routing_screen.dart';
 import 'package:education/services/services.dart';
@@ -9,14 +10,14 @@ import 'package:education/widgets/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletons/skeletons.dart';
 
-class NoticeScreen extends StatefulWidget {
-  const NoticeScreen({Key? key}) : super(key: key);
+class CommunicationsScreen extends StatefulWidget {
+  const CommunicationsScreen({Key? key}) : super(key: key);
 
   @override
-  State<NoticeScreen> createState() => _NoticeScreenState();
+  State<CommunicationsScreen> createState() => _CommunicationsScreenState();
 }
 
-class _NoticeScreenState extends State<NoticeScreen> {
+class _CommunicationsScreenState extends State<CommunicationsScreen> {
   Service service = Service();
   Helpers helper = Helpers();
   bool loader = true;
@@ -33,9 +34,8 @@ class _NoticeScreenState extends State<NoticeScreen> {
     }
 
     List<Widget> listToWidget() {
-      List<dynamic> noticesData = notices["data"];
-      List processData = helper.filterNoComunications(noticesData);
-      List<Widget> noticeWidget = processData
+      List<dynamic> noticesData = helper.filterDataList(notices["data"]);
+      List<Widget> noticeWidget = noticesData
           .where((item) => item is Map<String, dynamic>)
           .map((item) => Column(
                 children: [
@@ -59,7 +59,7 @@ class _NoticeScreenState extends State<NoticeScreen> {
     return Scaffold(
       backgroundColor: kBrandWhite,
       appBar: CustomAppBarWidget(
-        title: "Noticias y eventos",
+        title: "Comunicados",
         beforeWidget: RoutingScreen(),
         leadingActive: true,
       ),
@@ -74,15 +74,13 @@ class _NoticeScreenState extends State<NoticeScreen> {
                       borderRadius: BorderRadiusDirectional.circular(15)),
                 )
               : Column(
-                  children: helper
-                          .filterNoComunications(notices["data"])
-                          .isEmpty
+                  children: helper.filterDataList(notices["data"]).isEmpty
                       ? [
                           const SizedBox(
                             height: 50.0,
                           ),
                           NoDataWidget(
-                              message: "Aún no se subieron noticias o eventos.")
+                              message: "Aún no se subieron comunidados.")
                         ]
                       : listToWidget()),
         ),

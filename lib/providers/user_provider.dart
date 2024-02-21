@@ -6,12 +6,14 @@ class UserProvider with ChangeNotifier {
   Map<dynamic, dynamic> _ratings = {};
   Map<dynamic, dynamic> _schedule = {};
   Map<dynamic, dynamic> _calendar = {};
+  bool _tdata = true;
 
   Map<dynamic, dynamic> get user => _user;
   Map<dynamic, dynamic> get courses => _courses;
   Map<dynamic, dynamic> get ratings => _ratings;
   Map<dynamic, dynamic> get schedule => _schedule;
   Map<dynamic, dynamic> get calendar => _calendar;
+  bool get tdata => _tdata;
 
   void setUser(Map<dynamic, dynamic> newUser) {
     _user = newUser;
@@ -35,6 +37,11 @@ class UserProvider with ChangeNotifier {
 
   void setCalendar(Map<dynamic, dynamic> newCalendar) {
     _calendar = newCalendar;
+    notifyListeners();
+  }
+
+  void setTdata(bool newTdata) {
+    _tdata = newTdata;
     notifyListeners();
   }
 }

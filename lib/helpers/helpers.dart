@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Helpers {
   String toFirstCapitalizeCase(String input) {
     if (input.isEmpty) {
@@ -158,10 +156,12 @@ class Helpers {
         double sumaPesos = 0;
         String profesor = "";
         String tipo = "";
+        String docenteFoto = "";
 
         grupo.forEach((elemento) {
           profesor = elemento["nombres"];
           tipo = elemento["tipo"];
+          docenteFoto = elemento["docente_foto"];
           double peso =
               elemento['puntajes'].toDouble(); // Convertir a double aquí
           double nota = double.tryParse(elemento['nota_alum']) ??
@@ -181,6 +181,7 @@ class Helpers {
           "ordentipo": ordentipo,
           "promedio_notas": promedioNotas.toStringAsFixed(2),
           "promedio_ponderado": promedioPonderado.toStringAsFixed(2),
+          "docente_foto": docenteFoto
         });
       });
     });
@@ -265,5 +266,13 @@ class Helpers {
       default:
         return 'Número inválido';
     }
+  }
+
+  List filterDataList(List dataList) {
+    return dataList.where((data) => data["nombre"] == "Comunicados").toList();
+  }
+
+  List filterNoComunications(List dataList) {
+    return dataList.where((data) => data["nombre"] != "Comunicados").toList();
   }
 }

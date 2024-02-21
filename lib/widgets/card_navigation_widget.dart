@@ -1,8 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:education/preferences/preferences.dart';
+import 'package:education/providers/user_provider.dart';
 import 'package:education/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CardNavigationWidget extends StatelessWidget {
   Color color;
@@ -29,6 +31,7 @@ class CardNavigationWidget extends StatelessWidget {
       child: TextButton(
         onPressed: () {
           if (closeSession) {
+            context.read<UserProvider>().setTdata(true);
             preferences.saveValue("");
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => widget),
